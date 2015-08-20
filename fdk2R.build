@@ -9,7 +9,7 @@
 		<property name="SourcesDir"				value=".\"													unless="${property::exists('SourcesDir')}" />
 		<property name="SolutionFile"				value="BuildMachineFtpClient.sln"	unless="${property::exists('SolutionFile')}" />
 		<property name="VS2012Dir"				value="C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE" />
-		<property name="R_Exe" value="C:\Program Files\R\R-3.2.1\bin\R.exe" />
+		<property name="R_Exe" value="D:\apps\R\R-3.2.2\bin\R.exe" />
 		
 	</target>
 	<target name="ProjectDefaults" >
