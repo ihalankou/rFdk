@@ -87,7 +87,6 @@
     <Compile Include="FdkBarPairs.cs" />
     <Compile Include="FdkBars.cs" />
     <Compile Include="FdkCurrencyInfo.cs" />
-    <Compile Include="FdkHelper.cs" />
     <Compile Include="FdkLevel2.cs" />
     <Compile Include="FdkQuotes.cs" />
     <Compile Include="FdkRealTime.cs" />
@@ -100,10 +99,6 @@
     <Compile Include="FdkVars.cs" />
     <Compile Include="PartitionerUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared\FdkConnectLogic.cs" />
-    <Compile Include="Shared\FdkConnector.cs" />
-    <Compile Include="Shared\FdkTradeWrapper.cs" />
-    <Compile Include="Shared\FdkWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">
@@ -113,6 +108,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FdkHelper\FdkMinimal.csproj">
+      <Project>{c8e8bced-4a13-4521-853a-8160393d67a3}</Project>
+      <Name>FdkMinimal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

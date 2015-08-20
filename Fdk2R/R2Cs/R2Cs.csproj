@@ -104,6 +104,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FdkHelper\FdkMinimal.csproj">
+      <Project>{c8e8bced-4a13-4521-853a-8160393d67a3}</Project>
+      <Name>FdkMinimal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RSoftFxHost\RHost.csproj">
       <Project>{6b485272-ef8e-47f3-aee5-f3418b39de80}</Project>
       <Name>RHost</Name>
