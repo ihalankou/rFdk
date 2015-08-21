@@ -31,3 +31,4 @@ Fdk2R/packages/NUnit.*
 Fdk2R/packages/NLog*
 *.suo
 bin
+Store/*

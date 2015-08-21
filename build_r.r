@@ -1,4 +1,4 @@
-quickRequire <- function(packageName){
+quickRequire <- function(packageName, fullFile){
 	if(!require(packageName)){
 		install.packages(packageName, repos="http://cran.us.r-project.org")
 		require(packageName)
@@ -19,8 +19,10 @@ installBinaryHttr <- function(fdkRLibPackage){
   file.remove(fdkRLibPackage)
 }
 installBinaryHttr("rClr_0.7-4.zip")
-
+require(rClr)
 
 setwd("RPackage")
+require(devtools)
+
 devtools::document(roclets=c('rd', 'collate', 'namespace'))
 packPath <- devtools::build(binary = TRUE, args = c('--preclean'))

@@ -1,14 +1,14 @@
 #' Initialize the CLR runtime and loads the FDK host assembly
 #' 
 #' @export 
-ttInit <- function() {
+ttInit <- function() {t
   require(rClr)
   require(data.table)
-  
-  fileName <-system.file("data","RHost.dll", package="FdkRLib")
+  fileName <-system.file("data", "RHost.dll", package="FdkRLib")
+  clrLoadAssembly(fileName)
+
   clrLoadAssembly(fileName)
 }
-
 #' Connects to a TT server
 #' 
 #' @param address Url of the running server
@@ -18,7 +18,7 @@ ttInit <- function() {
 #' @export
 ttConnect <- function(address = "", login= "", password= "", fdkPath = "") {
   ttInit()
-  rClr::clrCallStatic('RHost.FdkHelper', 'ConnectToFdk', address, login, password, fdkPath)
+  rClr::clrCallStatic('RHost.FdkStatic', 'ConnectToFdk', address, login, password, fdkPath)
 }
 
 #' Disconnect from a TT server

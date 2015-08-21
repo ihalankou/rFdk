@@ -4,6 +4,755 @@
         <name>SoftFX.Extended.Net</name>
     </assembly>
     <members>
+        <member name="T:SoftFX.Extended.IDataCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataCache.SessionInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SoftFX.Extended.IDataClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SoftFX.Extended.IDataClient.WaitForLogon(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataClient.Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SoftFX.Extended.IDataClient.Start(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataClient.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataClient.DataServer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataClient.Logon">
+            <summary>
+            Occurs when data feed is logon.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataClient.Logout">
+            <summary>
+            Occurs when data feed is logout.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataClient.SessionInfo">
+            <summary>
+            Occurs when session info received or changed.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataClient.CacheInitialized">
+            <summary>
+            Occurs when local cache initialized.
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataClient.SynchOperationTimeout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataClient.IsStarted">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataClient.IsStopped">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataClient.UsedProtocolVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SoftFX.Extended.IDataFeed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataFeed.Cache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataFeed.Server">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataFeed.Tick">
+            <summary>
+            Occurs when a new quote is received.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataFeed.CurrencyInfo">
+            <summary>
+            Occurs when currencies information is initialized.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataFeed.SymbolInfo">
+            <summary>
+            Occurs when symbols information is initialized.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataFeed.Notify">
+            <summary>
+            Occurs when a notification is received.
+            </summary>
+        </member>
+        <member name="T:SoftFX.Extended.IDataFeedCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedCache.GetBid(System.String)">
+            <summary>
+            The method gets the best bid price by symbol.
+            </summary>
+            <param name="symbol">a required financial security.</param>
+            <returns>The best bid price.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedCache.TryGetBid(System.String,System.Double@)">
+            <summary>
+            The method gets the best bid price by symbol.
+            </summary>
+            <param name="symbol">a required financial security.</param>
+            <param name="price">the best bid.</param>
+            <returns>false, if off quotes, otherwise true.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedCache.TryGetBid(System.String,System.Double@,System.Double@,System.DateTime@)">
+            <summary>
+            The method gets the best bid price, volume and creation time by symbol.
+            </summary>
+            <param name="symbol">Can not be null.</param>
+            <param name="price">the best bid.</param>
+            <param name="volume">volume of the best bid.</param>
+            <param name="creationTime">the quote creation time.</param>
+            <returns>false, if off quotes, otherwise true.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedCache.GetAsk(System.String)">
+            <summary>
+            The method gets the best ask price by symbol.
+            </summary>
+            <param name="symbol">a required financial security.</param>
+            <returns>The best ask price.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedCache.TryGetAsk(System.String,System.Double@)">
+            <summary>
+            The method gets the best ask price by symbol.
+            </summary>
+            <param name="symbol">a required financial security.</param>
+            <param name="price">the best ask.</param>
+            <returns>false, if off quotes, otherwise true.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedCache.TryGetAsk(System.String,System.Double@,System.Double@,System.DateTime@)">
+            <summary>
+            The method gets the best ask price, volume and creation time by symbol.
+            </summary>
+            <param name="symbol">Can not be null.</param>
+            <param name="price">the best ask.</param>
+            <param name="volume">volume of the best ask.</param>
+            <param name="creationTime">the quote creation time.</param>
+            <returns>false, if off quotes, otherwise true.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedCache.GetLevel2(System.String)">
+            <summary>
+            The method gets level2 quotes by symbol.
+            </summary>
+            <param name="symbol">Can not be null.</param>
+            <returns>Level2 quotes.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedCache.TryGetLevel2(System.String,SoftFX.Extended.Quote@)">
+            <summary>
+            The method gets level2 quotes by symbol.
+            </summary>
+            <param name="symbol">Can not be null.</param>
+            <param name="quote"></param>
+            <returns>True, if quote for the symbol is presented, otherwise false.</returns>
+        </member>
+        <member name="P:SoftFX.Extended.IDataFeedCache.Symbols">
+            <summary>
+            Gets symbols information. Returned value can not be null.
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataFeedCache.Currencies">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SoftFX.Extended.IDataFeedServer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SoftFX.Extended.IDataServer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SoftFX.Extended.IDataServer.GetSessionInfo">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataServer.GetSessionInfoEx(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataServer.GetFileChunk(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="fileId"></param>
+            <param name="chunkId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataServer.GetFileChunkEx(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="fileId"></param>
+            <param name="chunkId"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetQuotesHistoryVersion">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetBarsHistoryMetaInfoFileEx(System.String,SoftFX.Extended.PriceType,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="priceType"></param>
+            <param name="period"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetBarsHistoryFiles(System.String,System.DateTime,SoftFX.Extended.PriceType,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="time"></param>
+            <param name="priceType"></param>
+            <param name="period"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetHistoryBars(System.String,System.DateTime,System.Int32,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="time"></param>
+            <param name="barsNumber"></param>
+            <param name="priceType"></param>
+            <param name="period"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetHistoryBarsEx(System.String,System.DateTime,System.Int32,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="time"></param>
+            <param name="barsNumber"></param>
+            <param name="priceType"></param>
+            <param name="period"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetBarsHistoryMetaInfoFile(System.String,SoftFX.Extended.PriceType,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="priceType"></param>
+            <param name="period"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetQuotesHistoryMetaInfoFile(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="includeLevel2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetQuotesHistoryMetaInfoFileEx(System.String,System.Boolean,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="includeLevel2"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetQuotesHistoryFiles(System.String,System.Boolean,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="includeLevel2"></param>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetBarsHistoryFilesEx(System.String,System.DateTime,SoftFX.Extended.PriceType,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="time"></param>
+            <param name="priceType"></param>
+            <param name="period"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetQuotesHistoryFilesEx(System.String,System.Boolean,System.DateTime,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="includeLevel2"></param>
+            <param name="time"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetSymbols">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetSymbolsEx(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetCurrencies">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.GetCurrencies(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.SubscribeToQuotes(System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="symbols"></param>
+            <param name="depth"></param>
+        </member>
+        <member name="M:SoftFX.Extended.IDataFeedServer.SubscribeToQuotesEx(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="symbols"></param>
+            <param name="depth"></param>
+            <param name="timeoutInMilliseconds"></param>
+        </member>
+        <member name="T:SoftFX.Extended.IDataTrade">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataTrade.Cache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataTrade.Server">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataTrade.AccountInfo">
+            <summary>
+            Occurs when account information is changed.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataTrade.ExecutionReport">
+            <summary>
+            Occurs when a trade operation is executing.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataTrade.TradeTransactionReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataTrade.PositionReport">
+            <summary>
+            The event is supported by Net account only.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataTrade.Notify">
+            <summary>
+            Occurs when a notification is received.
+            </summary>
+        </member>
+        <member name="E:SoftFX.Extended.IDataTrade.BalanceOperation">
+            <summary>
+            Occurs when a notification of balance operation is received.
+            </summary>
+        </member>
+        <member name="T:SoftFX.Extended.IDataTradeCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataTradeCache.TradeRecords">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataTradeCache.Positions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.IDataTradeCache.AccountInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SoftFX.Extended.IDataTradeServer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.GetAccountInfo">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.GetAccountInfoEx(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.SendOrder(System.String,SoftFX.Extended.TradeCommand,SoftFX.Extended.TradeRecordSide,System.Double,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="command"></param>
+            <param name="side"></param>
+            <param name="price"></param>
+            <param name="volume"></param>
+            <param name="stopLoss"></param>
+            <param name="takeProfit"></param>
+            <param name="expiration"></param>
+            <param name="comment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.SendOrderEx(System.String,SoftFX.Extended.TradeCommand,SoftFX.Extended.TradeRecordSide,System.Double,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="symbol"></param>
+            <param name="command"></param>
+            <param name="side"></param>
+            <param name="price"></param>
+            <param name="volume"></param>
+            <param name="stopLoss"></param>
+            <param name="takeProfit"></param>
+            <param name="expiration"></param>
+            <param name="comment"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.SendOrderEx(System.String,System.String,SoftFX.Extended.TradeCommand,SoftFX.Extended.TradeRecordSide,System.Double,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="operationId"></param>
+            <param name="symbol"></param>
+            <param name="command"></param>
+            <param name="side"></param>
+            <param name="price"></param>
+            <param name="volume"></param>
+            <param name="stopLoss"></param>
+            <param name="takeProfit"></param>
+            <param name="expiration"></param>
+            <param name="comment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.DeletePendingOrder(System.String,System.String,SoftFX.Extended.TradeRecordSide)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="clientId"></param>
+            <param name="side"></param>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.DeletePendingOrderEx(System.String,System.String,SoftFX.Extended.TradeRecordSide,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="clientId"></param>
+            <param name="side"></param>
+            <param name="timeoutInMilliseconds"></param>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.DeletePendingOrderEx(System.String,System.String,System.String,SoftFX.Extended.TradeRecordSide)">
+            <summary>
+            
+            </summary>
+            <param name="operationId"></param>
+            <param name="orderId"></param>
+            <param name="clientId"></param>
+            <param name="side"></param>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ModifyTradeRecord(System.String,System.String,System.String,SoftFX.Extended.TradeRecordType,SoftFX.Extended.TradeRecordSide,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="clientId"></param>
+            <param name="symbol"></param>
+            <param name="type"></param>
+            <param name="side"></param>
+            <param name="volume"></param>
+            <param name="newActivationPrice"></param>
+            <param name="newStopLoss"></param>
+            <param name="newTakeProfit"></param>
+            <param name="newExpiration"></param>
+            <param name="newComment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ModifyTradeRecordEx(System.String,System.String,System.String,SoftFX.Extended.TradeRecordType,SoftFX.Extended.TradeRecordSide,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="clientId"></param>
+            <param name="symbol"></param>
+            <param name="type"></param>
+            <param name="side"></param>
+            <param name="volume"></param>
+            <param name="newActivationPrice"></param>
+            <param name="newStopLoss"></param>
+            <param name="newTakeProfit"></param>
+            <param name="newExpiration"></param>
+            <param name="newComment"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ModifyTradeRecordEx(System.String,System.String,System.String,System.String,SoftFX.Extended.TradeRecordType,SoftFX.Extended.TradeRecordSide,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="operationId"></param>
+            <param name="orderId"></param>
+            <param name="clientId"></param>
+            <param name="symbol"></param>
+            <param name="type"></param>
+            <param name="side"></param>
+            <param name="volume"></param>
+            <param name="newActivationPrice"></param>
+            <param name="newStopLoss"></param>
+            <param name="newTakeProfit"></param>
+            <param name="newExpiration"></param>
+            <param name="newComment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ClosePosition(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ClosePositionEx(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="operationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ClosePositionEx(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ClosePositionEx(System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="operationId"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ClosePositionPartially(System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="volume"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ClosePositionPartiallyEx(System.String,System.Double,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="volume"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ClosePositionPartiallyEx(System.String,System.Double,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="volume"></param>
+            <param name="operationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.ClosePositionPartiallyEx(System.String,System.Double,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="orderId"></param>
+            <param name="volume"></param>
+            <param name="operationId"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.CloseByPositions(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="firstOrderId"></param>
+            <param name="secondOrderId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.CloseByPositionsEx(System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="firstOrderId"></param>
+            <param name="secondOrderId"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.CloseAllPositions">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.CloseAllPositionsEx(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.GetTradeRecords">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.GetTradeRecordsEx(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.GetTradeTransactionReports(SoftFX.Extended.TimeDirection,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            
+            </summary>
+            <param name="direction"></param>
+            <param name="subscribeToNotifications"></param>
+            <param name="from"></param>
+            <param name="to"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.GetTradeTransactionReports(SoftFX.Extended.TimeDirection,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="direction"></param>
+            <param name="subscribeToNotifications"></param>
+            <param name="from"></param>
+            <param name="to"></param>
+            <param name="preferedBufferSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.GetTradeTransactionReportsEx(SoftFX.Extended.TimeDirection,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="direction"></param>
+            <param name="subscribeToNotifications"></param>
+            <param name="from"></param>
+            <param name="to"></param>
+            <param name="preferedBufferSize"></param>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.UnsubscribeTradeTransactionReports">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SoftFX.Extended.IDataTradeServer.UnsubscribeTradeTransactionReportsEx(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+        </member>
         <member name="T:SoftFX.Extended.AssetInfo">
             <summary>
             This class has sense for cash accounts only
@@ -68,19 +817,59 @@
             Gets currency precision.
             </summary>
         </member>
+        <member name="T:SoftFX.Extended.FileChunk">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.FileChunk.FileName">
+            <summary>
+            Gets server side file name.
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.FileChunk.ChunksNumber">
+            <summary>
+            Gets total chunks number of the file.
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.FileChunk.FileSize">
+            <summary>
+            Gets size of the file in bytes.
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.FileChunk.Data">
+            <summary>
+            Gets data buffer of the current file chunk.
+            </summary>
+        </member>
+        <member name="T:SoftFX.Extended.CommissionChargeMethod">
+            <summary>
+            Commission charge method.
+            </summary>
+        </member>
+        <member name="F:SoftFX.Extended.CommissionChargeMethod.OneWay">
+            <summary>
+            One-way.
+            </summary>
+        </member>
+        <member name="F:SoftFX.Extended.CommissionChargeMethod.RoundTurn">
+            <summary>
+            Round-turn.
+            </summary>
+        </member>
         <member name="T:SoftFX.Extended.CommissionChargeType">
             <summary>
             Commission charge type.
             </summary>
         </member>
-        <member name="F:SoftFX.Extended.CommissionChargeType.OneWay">
+        <member name="F:SoftFX.Extended.CommissionChargeType.PerTrade">
             <summary>
             Per-trade.
             </summary>
         </member>
-        <member name="F:SoftFX.Extended.CommissionChargeType.RoundTurn">
+        <member name="F:SoftFX.Extended.CommissionChargeType.PerLot">
             <summary>
-            Round-turn.
+            Per-lot.
             </summary>
         </member>
         <member name="T:SoftFX.Extended.CommissionType">
@@ -185,6 +974,26 @@
             </summary>
         </member>
         <member name="P:SoftFX.Extended.Resources.EmbeddedModules.Microsoft_Practices_Unity_Interception">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.Resources.EmbeddedModules.msvcp120_64">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.Resources.EmbeddedModules.msvcp120_86">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.Resources.EmbeddedModules.msvcr120_64">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.Resources.EmbeddedModules.msvcr120_86">
             <summary>
               Looks up a localized resource of type System.Byte[].
             </summary>
@@ -765,7 +1574,7 @@
             Provides functionality for account financial state calculation.
             </summary>
         </member>
-        <member name="M:SoftFX.Extended.Financial.StateCalculator.#ctor(SoftFX.Extended.DataTrade,SoftFX.Extended.DataFeed)">
+        <member name="M:SoftFX.Extended.Financial.StateCalculator.#ctor(SoftFX.Extended.IDataTrade,SoftFX.Extended.IDataFeed)">
             <summary>
             Creates new financial state of account calculator.
             </summary>
@@ -862,7 +1671,7 @@
         </member>
         <member name="P:SoftFX.Extended.Financial.StateInfo.FreeMargin">
             <summary>
-            
+            Gets free margin.
             </summary>
         </member>
         <member name="P:SoftFX.Extended.Financial.StateInfo.MarginLevel">
@@ -1083,16 +1892,6 @@
             Represents bid/ask prices entry.
             </summary>
         </member>
-        <member name="F:SoftFX.Extended.Financial.PriceEntry.Bid">
-            <summary>
-            The best price of bids.
-            </summary>
-        </member>
-        <member name="F:SoftFX.Extended.Financial.PriceEntry.Ask">
-            <summary>
-            The best price of asks.
-            </summary>
-        </member>
         <member name="M:SoftFX.Extended.Financial.PriceEntry.#ctor(System.Double,System.Double)">
             <summary>
             Creates a new price entry instance.
@@ -1151,6 +1950,16 @@
             </summary>
             <param name="asset">a converting asset</param>
             <returns></returns>
+        </member>
+        <member name="P:SoftFX.Extended.Financial.PriceEntry.Bid">
+            <summary>
+            The best price of bids.
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.Financial.PriceEntry.Ask">
+            <summary>
+            The best price of asks.
+            </summary>
         </member>
         <member name="T:SoftFX.Extended.Financial.FinancialCalculator">
             <summary>
@@ -1779,12 +2588,12 @@
         </member>
         <member name="P:SoftFX.Extended.PairBar.Bid">
             <summary>
-            Gets or sets bar information for bid.
+            Gets bar information for bid.
             </summary>
         </member>
         <member name="P:SoftFX.Extended.PairBar.Ask">
             <summary>
-            Gets or sets bar information for ask.
+            Gets bar information for ask.
             </summary>
         </member>
         <member name="T:SoftFX.Extended.PairBars">
@@ -1792,7 +2601,7 @@
             Bars enumeration.
             </summary>
         </member>
-        <member name="M:SoftFX.Extended.PairBars.#ctor(SoftFX.Extended.DataFeed,System.String,SoftFX.Extended.BarPeriod,System.DateTime,System.DateTime)">
+        <member name="M:SoftFX.Extended.PairBars.#ctor(SoftFX.Extended.IDataFeed,System.String,SoftFX.Extended.BarPeriod,System.DateTime,System.DateTime)">
             <summary>
             Creates a new PairBars stream instance.
             If startTime is less or equal than endTime then this is forward bars enumeration (from past to future), otherwise this is backward enumeration (from future to past).
@@ -1818,7 +2627,7 @@
             <param name="endTime">A end time of bars enumeration.</param>
             <exception cref="T:System.ArgumentNullException">If datafeed, period or symbol is null.</exception>
         </member>
-        <member name="M:SoftFX.Extended.PairBars.#ctor(SoftFX.Extended.DataFeed,System.String,SoftFX.Extended.BarPeriod,System.DateTime,System.DateTime,System.Int32)">
+        <member name="M:SoftFX.Extended.PairBars.#ctor(SoftFX.Extended.IDataFeed,System.String,SoftFX.Extended.BarPeriod,System.DateTime,System.DateTime,System.Int32)">
             <summary>
             Creates a new Bars stream instance.
             If startTime is less or equal than endTime then this is forward bars enumeration (from past to future), otherwise this is backward enumeration (from future to past).
@@ -1833,7 +2642,7 @@
             <exception cref="T:System.ArgumentNullException">If datafeed, period or symbol is null.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">If preferredBufferSize is less than 2.</exception>
         </member>
-        <member name="M:SoftFX.Extended.PairBars.#ctor(SoftFX.Extended.DataFeed,System.String,SoftFX.Extended.BarPeriod,System.DateTime,System.Int32)">
+        <member name="M:SoftFX.Extended.PairBars.#ctor(SoftFX.Extended.IDataFeed,System.String,SoftFX.Extended.BarPeriod,System.DateTime,System.Int32)">
             <summary>
             Creates a new Bars stream instance.
             If barsNumber is less than zero then this is forward bars enumeration (from past to future), otherwise this is backward enumeration (from future to past).
@@ -1863,7 +2672,7 @@
             <param name="barsNumber">Requested bars number; positive value means forward enumeration; negative value means backward enumeration.</param>
             <exception cref="T:System.ArgumentNullException">If datafeed, period or symbol is null.</exception>
         </member>
-        <member name="M:SoftFX.Extended.PairBars.#ctor(SoftFX.Extended.DataFeed,System.String,SoftFX.Extended.BarPeriod,System.DateTime,System.Int32,System.Int32)">
+        <member name="M:SoftFX.Extended.PairBars.#ctor(SoftFX.Extended.IDataFeed,System.String,SoftFX.Extended.BarPeriod,System.DateTime,System.Int32,System.Int32)">
             <summary>
             Creates a new Bars stream instance.
             If barsNumber is less than zero then this is forward bars enumeration (from past to future), otherwise this is backward enumeration (from future to past).
@@ -2708,7 +3517,7 @@
             High level functionality of data feed history local cache.
             </summary>
         </member>
-        <member name="M:SoftFX.Extended.Storage.DataFeedStorage.#ctor(System.String,System.Type,System.Int32,SoftFX.Extended.DataFeed,System.Boolean,System.Boolean)">
+        <member name="M:SoftFX.Extended.Storage.DataFeedStorage.#ctor(System.String,System.Type,System.Int32,SoftFX.Extended.IDataFeed,System.Boolean,System.Boolean)">
             <summary>
             Creates and initializes a new data feed storage.
             </summary>
@@ -2731,7 +3540,7 @@
             <param name="saveTickLevel2History">Save incomning ticks as level2 history or not</param>
             <exception cref="T:System.ArgumentNullException">If location is null.</exception>
         </member>
-        <member name="M:SoftFX.Extended.Storage.DataFeedStorage.#ctor(System.String,System.Type,System.Int32,SoftFX.Extended.DataFeed,System.Boolean)">
+        <member name="M:SoftFX.Extended.Storage.DataFeedStorage.#ctor(System.String,System.Type,System.Int32,SoftFX.Extended.IDataFeed,System.Boolean)">
             <summary>
             Creates and initializes a new data feed storage.
             </summary>
@@ -2752,7 +3561,7 @@
             <param name="flushOnDispose">If true, then quotes cache in memory will be flushed to hard drive.</param>
             <exception cref="T:System.ArgumentNullException">If location is null.</exception>
         </member>
-        <member name="M:SoftFX.Extended.Storage.DataFeedStorage.#ctor(System.String,System.Type,SoftFX.Extended.DataFeed,System.Boolean)">
+        <member name="M:SoftFX.Extended.Storage.DataFeedStorage.#ctor(System.String,System.Type,SoftFX.Extended.IDataFeed,System.Boolean)">
             <summary>
             Creates and initializes a new data feed storage Ver.1.
             </summary>
@@ -2778,7 +3587,7 @@
             <param name="qhVersion"></param>
             <returns></returns>
         </member>
-        <member name="M:SoftFX.Extended.Storage.DataFeedStorage.Bind(SoftFX.Extended.DataFeed)">
+        <member name="M:SoftFX.Extended.Storage.DataFeedStorage.Bind(SoftFX.Extended.IDataFeed)">
             <summary>
             Binds / unbinds data feed for tick events.
             Storage uses tick events, if newDataFeed is not null
@@ -2867,11 +3676,6 @@
         <member name="T:SoftFX.Extended.Storage.HistoryInfo">
             <summary>
             History information of bars/quotes.
-            </summary>
-        </member>
-        <member name="M:SoftFX.Extended.Storage.HistoryInfo.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:SoftFX.Extended.Storage.HistoryInfo"/> object.
             </summary>
         </member>
         <member name="M:SoftFX.Extended.Storage.HistoryInfo.#ctor(System.DateTime,System.DateTime)">
@@ -3324,7 +4128,7 @@
             Bars enumeration.
             </summary>
         </member>
-        <member name="M:SoftFX.Extended.Bars.#ctor(SoftFX.Extended.DataFeed,System.String,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.DateTime,System.DateTime)">
+        <member name="M:SoftFX.Extended.Bars.#ctor(SoftFX.Extended.IDataFeed,System.String,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.DateTime,System.DateTime)">
             <summary>
             Creates a new Bars stream instance.
             If startTime is less or equal than endTime then this is forward bars enumeration (from past to future), otherwise this is backward enumeration (from future to past).
@@ -3352,7 +4156,7 @@
             <param name="endTime">A end time of bars enumeration.</param>
             <exception cref="T:System.ArgumentNullException">If datafeed, period or symbol is null.</exception>
         </member>
-        <member name="M:SoftFX.Extended.Bars.#ctor(SoftFX.Extended.DataFeed,System.String,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.DateTime,System.DateTime,System.Int32)">
+        <member name="M:SoftFX.Extended.Bars.#ctor(SoftFX.Extended.IDataFeed,System.String,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.DateTime,System.DateTime,System.Int32)">
             <summary>
             Creates a new Bars stream instance.
             If startTime is less or equal than endTime then this is forward bars enumeration (from past to future), otherwise this is backward enumeration (from future to past).
@@ -3368,7 +4172,7 @@
             <exception cref="T:System.ArgumentNullException">If datafeed, period or symbol is null.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">If preferredBufferSize is less than 2.</exception>
         </member>
-        <member name="M:SoftFX.Extended.Bars.#ctor(SoftFX.Extended.DataFeed,System.String,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.DateTime,System.Int32)">
+        <member name="M:SoftFX.Extended.Bars.#ctor(SoftFX.Extended.IDataFeed,System.String,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.DateTime,System.Int32)">
             <summary>
             Creates a new Bars stream instance.
             If barsNumber is less than zero then this is forward bars enumeration (from past to future), otherwise this is backward enumeration (from future to past).
@@ -3400,7 +4204,7 @@
             <param name="barsNumber">Requested bars number; positive value means forward enumeration; negative value means backward enumeration.</param>
             <exception cref="T:System.ArgumentNullException">If storage, period or symbol is null.</exception>
         </member>
-        <member name="M:SoftFX.Extended.Bars.#ctor(SoftFX.Extended.DataFeed,System.String,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.DateTime,System.Int32,System.Int32)">
+        <member name="M:SoftFX.Extended.Bars.#ctor(SoftFX.Extended.IDataFeed,System.String,SoftFX.Extended.PriceType,SoftFX.Extended.BarPeriod,System.DateTime,System.Int32,System.Int32)">
             <summary>
             Creates a new Bars stream instance.
             If barsNumber is less than zero then this is forward bars enumeration (from past to future), otherwise this is backward enumeration (from future to past).
@@ -3473,6 +4277,13 @@
             <summary>
             This method is called when DataClient object is constructed.
             </summary>
+        </member>
+        <member name="M:SoftFX.Extended.DataClient.WaitForLogon(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="timeoutInMilliseconds"></param>
+            <returns></returns>
         </member>
         <member name="M:SoftFX.Extended.DataClient.Start">
             <summary>
@@ -3933,7 +4744,7 @@
             The class provides methods for reading server side files.
             </summary>
         </member>
-        <member name="M:SoftFX.Extended.DataStream.#ctor(SoftFX.Extended.DataClient,System.String)">
+        <member name="M:SoftFX.Extended.DataStream.#ctor(SoftFX.Extended.IDataClient,System.String)">
             <summary>
             Creates a new data stream object.
             </summary>
@@ -3941,7 +4752,7 @@
             <param name="fileId">A server file Id; can not be null.</param>
             <exception cref="T:System.ArgumentNullException">If dataClient or fileId is null.</exception>
         </member>
-        <member name="M:SoftFX.Extended.DataStream.#ctor(SoftFX.Extended.DataClient,System.String,System.Int32)">
+        <member name="M:SoftFX.Extended.DataStream.#ctor(SoftFX.Extended.IDataClient,System.String,System.Int32)">
             <summary>
             Creates a new data stream object.
             </summary>
@@ -5138,7 +5949,15 @@
         </member>
         <member name="M:SoftFX.Extended.Features.SymbolInfoFeaturesProvider.IsCommissionChargeTypeSupported(SoftFX.Extended.FixProtocolVersion)">
             <summary>
-            Returns true, if a protocol version of symbol info supports 'CommissionCharge' property, otherwise false.
+            Returns true, if a protocol version of symbol info supports 'CommissionChargeType' property, otherwise false.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">If protocol version is null.</exception>
+            <exception cref="T:System.ArgumentException">If an input protocol version is unknown.</exception>
+            <returns>True, if the corresponding property or method is supported for a protocol version, otherwise false.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.Features.SymbolInfoFeaturesProvider.IsCommissionChargeMethodSupported(SoftFX.Extended.FixProtocolVersion)">
+            <summary>
+            Returns true, if a protocol version of symbol info supports 'CommissionChargeMethod' property, otherwise false.
             </summary>
             <exception cref="T:System.ArgumentNullException">If protocol version is null.</exception>
             <exception cref="T:System.ArgumentException">If an input protocol version is unknown.</exception>
@@ -5762,6 +6581,21 @@
             Close conversion rate.
             </summary>
         </member>
+        <member name="P:SoftFX.Extended.Reports.TradeTransactionReport.ActionId">
+            <summary>
+            Order action number.
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.Reports.TradeTransactionReport.PosRemainingSide">
+            <summary>
+            Position remaining amount side.
+            </summary>
+        </member>
+        <member name="P:SoftFX.Extended.Reports.TradeTransactionReport.PosRemainingPrice">
+            <summary>
+            Position remaining amount price.
+            </summary>
+        </member>
         <member name="T:SoftFX.Extended.TradeCommand">
             <summary>
             Contains possible trade commands.
@@ -6269,6 +7103,12 @@
             </summary>
             <exception cref="T:SoftFX.Extended.Errors.UnsupportedFeatureException">If the feature is not supported by used protocol version.</exception>
         </member>
+        <member name="P:SoftFX.Extended.SymbolInfo.CommissionChargeMethod">
+            <summary>
+            Gets commission charge method.
+            </summary>
+            <exception cref="T:SoftFX.Extended.Errors.UnsupportedFeatureException">If the feature is not supported by used protocol version.</exception>
+        </member>
         <member name="P:SoftFX.Extended.SymbolInfo.LimitsCommission">
             <summary>
             Gets commission value for limits.
@@ -6649,6 +7489,11 @@
             Returns true, if a corresponding symbol info supports 'CommissionChargeType' property, otherwise false.
             </summary>
         </member>
+        <member name="P:SoftFX.Extended.Features.SymbolInfoFeatures.IsCommissionChargeMethodSupported">
+            <summary>
+            Returns true, if a corresponding symbol info supports 'CommissionChargeMethod' property, otherwise false.
+            </summary>
+        </member>
         <member name="P:SoftFX.Extended.Features.SymbolInfoFeatures.IsLimitsCommissionSupported">
             <summary>
             Returns true, if a corresponding symbol info supports 'LimitsCommission' property, otherwise false.
@@ -6900,21 +7745,21 @@
         </member>
         <member name="P:SoftFX.Extended.FixProtocolVersion.Type">
             <summary>
-            Gets or sets protocol type.
+            Gets protocol type.
             </summary>
             <value>A new protocol type; can not be null.</value>
             <exception cref="T:System.ArgumentNullException">If protocol type is null.</exception>
         </member>
         <member name="P:SoftFX.Extended.FixProtocolVersion.MajorVersion">
             <summary>
-            Gets or sets protocol major version.
+            Gets protocol major version.
             </summary>
             <value>A new protocol major version; can not be negative.</value>
             <exception cref="T:System.ArgumentException">If protocol major version is negative.</exception>
         </member>
         <member name="P:SoftFX.Extended.FixProtocolVersion.MinorVersion">
             <summary>
-            Gets or sets protocol minor version.
+            Gets protocol minor version.
             </summary>
             <value>A new protocol minor version; can not be negative.</value>
             <exception cref="T:System.ArgumentException">If protocol minor version is negative.</exception>
