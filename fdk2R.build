@@ -101,13 +101,13 @@
 
 		<property name="Fdk2RVersion" value="1.0.20150817" />
 		
-		<property name="MSBuild.SolutionFile" value="${SrcDir}\Fdk2R\R2Fdk.sln"/>
+		<property name="MSBuild.SolutionFile" value="${SrcDir}\Fdk2R\RFdk.sln"/>
 		<property name="MSBuild.Output" value=".\OrdersCleaner.build-${MSBuild.Configuration}-${MSBuild.Platform}.log"/>
 		<call target="RunMSBuild" />
     
     <call target="build_package" />
 		
-		<move file="FdkRLib_${Fdk2RVersion}.zip" todir="./dist"/>
+		<move file="rFdk_${Fdk2RVersion}.zip" todir="./dist"/>
 		<delete file="build_r.r.Rout" />
 
 	</target>

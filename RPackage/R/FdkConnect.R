@@ -25,7 +25,7 @@ ttConnect <- function(address = "", login= "", password= "", fdkPath = "") {
 #' 
 #' @export
 ttDisconnect <- function() {
-  rClr::clrCallStatic('RHost.FdkHelper', 'Disconnect')
+  rClr::clrCallStatic('RHost.FdkStatic', 'Disconnect')
 }
 
 #' Displays a DateTime
@@ -33,5 +33,5 @@ ttDisconnect <- function() {
 #' @param dateToShow An R datetime
 #' @export
 ttDisplayDate <- function(dateToShow) {
-  rClr::clrCallStatic('RHost.FdkHelper', 'DisplayDate', dateToShow)
+  rClr::clrCallStatic('RHost.FdkStatic', 'DisplayDate', dateToShow)
 }

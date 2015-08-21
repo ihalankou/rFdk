@@ -1,4 +1,4 @@
-Package: FdkRLib
+Package: rFdk
 Type: Package
 Title: Soft FX integration of R with FDK
 Version: 1.0.20150817

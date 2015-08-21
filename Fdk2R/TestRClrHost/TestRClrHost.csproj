@@ -135,9 +135,9 @@
       <Project>{c8e8bced-4a13-4521-853a-8160393d67a3}</Project>
       <Name>FdkMinimal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RSoftFxHost\RHost.csproj">
+    <ProjectReference Include="..\RSoftFxHost\FdkRHost.csproj">
       <Project>{6B485272-EF8E-47F3-AEE5-F3418B39DE80}</Project>
-      <Name>RHost</Name>
+      <Name>FdkRHost</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

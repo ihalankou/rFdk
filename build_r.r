@@ -1,4 +1,4 @@
-quickRequire <- function(packageName, fullFile){
+quickRequire <- function(packageName){
 	if(!require(packageName)){
 		install.packages(packageName, repos="http://cran.us.r-project.org")
 		require(packageName)
