@@ -4,7 +4,7 @@
 ttInit <- function() {t
   require(rClr)
   require(data.table)
-  fileName <-system.file("data", "RHost.dll", package="FdkRLib")
+  fileName <-system.file("data", "FdkRHost.dll", package="FdkRLib")
   clrLoadAssembly(fileName)
 
   clrLoadAssembly(fileName)
