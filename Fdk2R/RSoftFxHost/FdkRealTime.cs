@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Events;
 
@@ -32,7 +32,7 @@ namespace RHost
 				throw;
 			}
 		}
-        static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        static readonly ILog Log = LogManager.GetLogger(typeof(FdkRealTime));
 
 		public static string SnapshotMonitoredSymbol(double id)
 		{

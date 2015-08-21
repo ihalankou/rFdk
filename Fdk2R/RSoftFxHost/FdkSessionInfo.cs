@@ -1,5 +1,5 @@
 ﻿using System;
-using NLog;
+using log4net;
 using SoftFX.Extended;
 
 namespace RHost
@@ -25,7 +25,7 @@ namespace RHost
 				throw;
 			}     
         }
-        static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        static readonly ILog Log = LogManager.GetLogger(typeof(FdkSessionInfo));
 
         public static string PlatformCompany(string varName)
         {

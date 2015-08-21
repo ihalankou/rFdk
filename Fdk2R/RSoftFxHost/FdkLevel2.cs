@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using log4net;
 using SoftFX.Extended;
 
 namespace RHost
@@ -24,7 +24,7 @@ namespace RHost
 
 	public class FdkLevel2
 	{
-		static readonly Logger Log = LogManager.GetCurrentClassLogger();
+		static readonly ILog Log = LogManager.GetLogger(typeof(FdkLevel2));
 		/// <summary>
 		/// Get quote packed 
 		/// </summary>
@@ -39,7 +39,7 @@ namespace RHost
 			{
 				var level = (int) levelDbl;
 
-				Log.Info("FdkLevel2.GetQuotePacked( symbol: {0}, startTime: {1}, endTime: {2}, level: {3})",
+				Log.InfoFormat("FdkLevel2.GetQuotePacked( symbol: {0}, startTime: {1}, endTime: {2}, level: {3})",
 					symbol, startTime, endTime, levelDbl);
 
 				Quote[] quotesData = FdkQuotes.CalculateHistoryForSymbolArray(symbol, startTime, endTime, level);

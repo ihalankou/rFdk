@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FdkMinimal.Facilities;
+using SoftFX.Extended.Financial;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,14 @@ namespace RHost
     {
         public static int ConnectToFdk(string address, string login, string password, string path)
         {
-            return FdkHelper.ConnectToFdk(address, login, password, path);
+            var result = FdkHelper.ConnectToFdk(address, login, password, path);
+            if(result == 0)
+            {
+                var symbolInfoDic = FdkHelper.Wrapper.GetSymbolsDict();
+                var symbolInfoList = symbolInfoDic.Values.ToList();
+                SetRatesOfCurrentTime rates = new SetRatesOfCurrentTime(symbolInfoList, Calculator);
+            }
+            return result;
         }
         public static void Disconnect()
         {
@@ -20,6 +29,14 @@ namespace RHost
         public static void DisplayDate(DateTime time)
         {
             FdkHelper.DisplayDate(time);
+        }
+
+        static FinancialCalculator Calculator { get; set; }
+
+        static FdkStatic()
+        {
+            Calculator = new FinancialCalculator();
+
         }
 
     }

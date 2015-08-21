@@ -1,14 +1,15 @@
 using System;
 using System.Linq;
-using NLog;
+using log4net;
 using SoftFX.Extended;
 using System.Diagnostics;
+using log4net;
 
 namespace RHost
 {
 	public class FdkBarPairs
 	{
-		readonly static Logger Log = LogManager.GetCurrentClassLogger();
+		readonly static ILog Log = LogManager.GetLogger(typeof(FdkBarPairs));
 
 		/// <summary>
 		/// Get the bar data as pairs
@@ -27,7 +28,7 @@ namespace RHost
 				if (barPeriod == null)
 					return String.Empty;
 
-				Log.Info("FdkBarPairs.ComputeBarPairs( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
+				Log.InfoFormat("FdkBarPairs.ComputeBarPairs( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
 					symbol, barPeriodStr, startTime, endTime, barCountDbl);
 
 				PairBar[] barsData;

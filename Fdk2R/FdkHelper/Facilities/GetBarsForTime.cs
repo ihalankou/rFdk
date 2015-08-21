@@ -10,16 +10,15 @@ using System.Threading.Tasks;
 
 namespace FdkMinimal.Facilities
 {
-    public class GetBarsForTime
+    public class SetRatesOfCurrentTime
     {
         readonly List<SymbolInfo> _symbolInfoDic;
-        DateTime _closeTime;
         FinancialCalculator _calculator;
         readonly HashSet<string> _currencies;
         Dictionary<string, SymbolInfo> _symbols;
 
-		ILog Log = LogManager.GetLogger(typeof(GetBarsForTime));
-		
+        ILog Log = LogManager.GetLogger(typeof(SetRatesOfCurrentTime));
+
         public Dictionary<string, SymbolInfo> Symbols
         {
             get
@@ -32,15 +31,14 @@ namespace FdkMinimal.Facilities
                 _symbols = value;
             }
         }
-        
-        public GetBarsForTime(DateTime closeTime, List<SymbolInfo> symbolInfoDic, FinancialCalculator calculator)
+
+        public SetRatesOfCurrentTime(List<SymbolInfo> symbolInfoDic, FinancialCalculator calculator)
         {
             _symbolInfoDic = symbolInfoDic;
-            _closeTime = closeTime;
             _calculator = calculator;
             _currencies = new HashSet<string>();
             Symbols = new Dictionary<string, SymbolInfo>();
-            foreach(var sym in symbolInfoDic)
+            foreach (var sym in symbolInfoDic)
             {
                 _currencies.Add(sym.Currency);
                 _currencies.Add(sym.SettlementCurrency);
@@ -57,10 +55,10 @@ namespace FdkMinimal.Facilities
                 Symbols.Remove(sym.Symbol);
             }
         }
-        
+
         public void Process()
         {
-            foreach(var currName in _currencies)
+            foreach (var currName in _currencies)
             {
                 _calculator.Currencies.Add(currName);
             }
@@ -75,15 +73,15 @@ namespace FdkMinimal.Facilities
 
 
             PriceEntries pe = _calculator.Prices;
-			
+
             var feed = FdkHelper.Wrapper.ConnectLogic.Feed;
             var server = feed.Server;
-            server.SubscribeToQuotes(_symbolInfoDic.Select(sym=>sym.Name), 1);
+            server.SubscribeToQuotes(_symbolInfoDic.Select(sym => sym.Name), 1);
             var autoResetEvent = new AutoResetEvent(true);
             feed.Tick += (arg, ev) => autoResetEvent.Set();
             autoResetEvent.WaitOne();
             Thread.Sleep(100);
-            
+
             _symbolInfoDic.Each(sym =>
             {
                 var retries = 5;
@@ -93,7 +91,7 @@ namespace FdkMinimal.Facilities
                     Thread.Sleep(100);
                     retries--;
                 }
-             
+
                 try
                 {
                     pe.Update(sym.Name, price, price);
@@ -103,7 +101,7 @@ namespace FdkMinimal.Facilities
                     Console.WriteLine("Exception on updating calculator for symbol: {0} exception: {1}", sym.Name, ex);
                 }
             });
-            
+
         }
     }
 }

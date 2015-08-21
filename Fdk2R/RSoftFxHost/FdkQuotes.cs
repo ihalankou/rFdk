@@ -1,20 +1,20 @@
 using System;
 using System.Linq;
-using NLog;
+using log4net;
 using SoftFX.Extended;
 
 namespace RHost
 {
 	public class FdkQuotes
 	{
-		static readonly Logger Log = LogManager.GetCurrentClassLogger();
+		static readonly ILog Log = LogManager.GetLogger(typeof(FdkQuotes));
 
 		public static string ComputeQuoteHistory(string symbol, DateTime startTime, DateTime endTime, double depthDbl)
 		{
 			try
 			{
 				var depth = (int)depthDbl;
-				Log.Info("FdkQuotes.ComputeQuoteHistory( symbol: {0}, startTime: {1}, endTime: {2}, level: {3})",
+				Log.InfoFormat("FdkQuotes.ComputeQuoteHistory( symbol: {0}, startTime: {1}, endTime: {2}, level: {3})",
 					symbol, startTime, endTime, depthDbl);
 				
 				var quotesData = CalculateHistoryForSymbolArray(symbol, startTime, endTime, depth);

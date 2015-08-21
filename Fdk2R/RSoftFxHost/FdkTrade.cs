@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using log4net;
 using SoftFX.Extended;
 
 namespace RHost
@@ -28,7 +28,7 @@ namespace RHost
                     .Where(tr=>tr.Created!= null && (tr.Created >= startTime && tr.Created <= endTime))
                     .ToArray();
 				
-				Log.Info("FdkTrade.GetTradeRecords( start: {0}, end: {1}",
+				Log.InfoFormat("FdkTrade.GetTradeRecords( start: {0}, end: {1}",
 					startTime, endTime);
 				
 				var varName = FdkVars.RegisterVariable(tradeRecords, "trades");
@@ -56,7 +56,7 @@ namespace RHost
 				throw;
 			}     
 		}
-        static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        static readonly ILog Log = LogManager.GetLogger(typeof(FdkTrade));
 
         public static AccountInfo GetAccountInfo()
         {

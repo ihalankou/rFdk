@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using NLog;
+using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Reports;
 using System.Collections.Generic;
@@ -19,7 +19,8 @@ namespace RHost
 		{
 			try
 			{
-				Log.Info("FdkTradeReports.GetTradeTransactionReport( from: {0}, to: {1}",
+				Log.InfoFormat(
+                    "FdkTradeReports.GetTradeTransactionReport( from: {0}, to: {1}",
 					from, to);
 
 				var tradeRecordsStream = new List<TradeTransactionReport>(1000);
@@ -35,7 +36,7 @@ namespace RHost
 				throw;
 			}     
         }
-        static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        static readonly ILog Log = LogManager.GetLogger(typeof(FdkTradeReports));
 		public static string GetTradeTransactionReportAll(int maxSize = 1000000)
         {
 			var sw = Stopwatch.StartNew ();

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using NLog;
+using log4net;
 using SoftFX.Extended;
 
 namespace RHost
@@ -22,7 +22,7 @@ namespace RHost
 				throw;
 			}            
         }
-        static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        static readonly ILog Log = LogManager.GetLogger(typeof(FdkCurrencyInfo));
 
         public static string[] GetCurrencyDescription(string currencyInfo)
         {

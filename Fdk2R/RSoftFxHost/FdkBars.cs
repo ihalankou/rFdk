@@ -1,14 +1,14 @@
 using System;
 using System.Linq;
-using NLog;
 using SoftFX.Extended;
 using SoftFX.Extended.Storage;
+using log4net;
 
 namespace RHost
 {
 	public static class FdkBars
 	{
-		static readonly Logger Log = LogManager.GetCurrentClassLogger();
+		static readonly ILog Log = LogManager.GetLogger(typeof(FdkBars));
 		#region Bars
 
 
@@ -25,7 +25,7 @@ namespace RHost
 				if (priceType == null)
 					return string.Empty;
 
-				Log.Info("FdkBars.ComputeBarsRangeTime( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
+				Log.InfoFormat("FdkBars.ComputeBarsRangeTime( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
 					symbol, barPeriodStr, startTime, endTime, barCountDbl);
 				
 				Bar[] barsData;

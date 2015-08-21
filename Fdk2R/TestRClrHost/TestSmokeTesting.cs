@@ -15,7 +15,7 @@ namespace TestRClrHost
             Assert.AreEqual(0, FdkHelper.ConnectToFdk("ttlive.fxopen.com", "123318", "rCrT9e4t73HF", @"c:\FdkCaches\Cache1"));
 
             FdkHelper.Disconnect();
-        }
+		}  
 
         [Test]
         public void ConnectToAccountStaging57()
