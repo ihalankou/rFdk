@@ -1,17 +1,21 @@
-quickRequire <- function(packageName){
-	if(!require(packageName)){
-		install.packages(packageName, repos="http://cran.us.r-project.org")
-		require(packageName)
-	}
-  
+
+if(!require(roxygen2)){
+  install.packages("roxygen2", repos="http://cran.us.r-project.org")
+  require(roxygen2)
 }
 
-quickRequire("roxygen2")
-quickRequire("devtools")
-quickRequire("data.table")
+if(!require(devtools)){
+  install.packages("devtools", repos="http://cran.us.r-project.org")
+  require(devtools)
+}
+
+if(!require(data.table)){
+  install.packages("data.table", repos="http://cran.us.r-project.org")
+  require(data.table)
+}
 
 installBinaryHttr <- function(fdkRLibPackage){
-  basicUrl = "https://github.com/SoftFx/FdkRLib/raw/master/dist/"
+  basicUrl = "https://github.com/SoftFx/FdkRLib/raw/dev/dist/"
   fullUrl = paste(basicUrl, fdkRLibPackage, sep = "")
   download.file(fullUrl,destfile = fdkRLibPackage, method = "libcurl")
   
