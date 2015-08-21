@@ -11,7 +11,6 @@ ttGetSymbolData <- function(){
   minTradeVolume = GetSymbolMinTradeVolume(symInfo)
   name = GetSymbolName(symInfo)
   precision = GetSymbolPrecision(symInfo)
-  contractSize = GetRoundLot(symInfo)
   profitCurrency = GetSymbolSettlementCurrency(symInfo)
   swapLong = GetSymbolSwapSizeLong(symInfo)
   swapShort = GetSymbolSwapSizeShort(symInfo)
@@ -19,7 +18,7 @@ ttGetSymbolData <- function(){
   UnregisterVar(symInfo)
   
   data.table(
-    name, precision, contractSize, contractMultiplier,
+    name, precision, contractMultiplier,
     comission, marginCurrency, profitCurrency,
     limitsComission,
     minTradeVolume, maxTradeVolume, 
@@ -69,11 +68,6 @@ GetSymbolName <- function(symInfo) {
 #' @param symInfo RHost variable that stores the array
 GetSymbolPrecision <- function(symInfo) {
   rClr::clrCallStatic('RHost.FdkSymbolInfo', 'GetSymbolPrecision', symInfo)
-}
-#' Get symbol field
-#' @param symInfo RHost variable that stores the array
-GetRoundLot <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkSymbolInfo', 'GetRoundLot', symInfo)
 }
 #' Get symbol field
 #' @param symInfo RHost variable that stores the array
