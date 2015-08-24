@@ -1,7 +1,9 @@
 ﻿using FdkMinimal.Facilities;
+using log4net.Config;
 using SoftFX.Extended.Financial;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,16 @@ namespace RHost
 {
     public static class FdkStatic
     {
+
+        static FinancialCalculator Calculator { get; set; }
+        static FdkStatic()
+        {
+            Calculator = new FinancialCalculator();
+
+            Console.WriteLine("Logging in current folder: '{0}'", Directory.GetCurrentDirectory());
+            // Configure log4net.
+            XmlConfigurator.Configure();
+        }
         public static int ConnectToFdk(string address, string login, string password, string path)
         {
             var result = FdkHelper.ConnectToFdk(address, login, password, path);
@@ -21,6 +33,7 @@ namespace RHost
             }
             return result;
         }
+
         public static void Disconnect()
         {
             FdkHelper.Disconnect();
@@ -29,14 +42,6 @@ namespace RHost
         public static void DisplayDate(DateTime time)
         {
             FdkHelper.DisplayDate(time);
-        }
-
-        static FinancialCalculator Calculator { get; set; }
-
-        static FdkStatic()
-        {
-            Calculator = new FinancialCalculator();
-
         }
 
     }

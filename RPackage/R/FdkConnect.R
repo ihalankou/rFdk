@@ -6,8 +6,6 @@ ttInit <- function() {t
   require(data.table)
   fileName <-system.file("data", "FdkRHost.dll", package="rFdk")
   clrLoadAssembly(fileName)
-
-  clrLoadAssembly(fileName)
 }
 #' Connects to a TT server
 #' 
