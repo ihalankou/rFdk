@@ -2,12 +2,10 @@ using System;
 using System.Linq;
 using log4net;
 using SoftFX.Extended;
-using System.Diagnostics;
-using log4net;
 
 namespace RHost
 {
-	public class FdkBarPairs
+    public class FdkBarPairs
 	{
 		readonly static ILog Log = LogManager.GetLogger(typeof(FdkBarPairs));
 

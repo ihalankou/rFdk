@@ -3,8 +3,10 @@ using log4net.Config;
 using SoftFX.Extended.Financial;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,11 +19,18 @@ namespace RHost
         static FdkStatic()
         {
             Calculator = new FinancialCalculator();
+            SetupLog4Net();
+        }
 
+        static void SetupLog4Net()
+        {
             Console.WriteLine("Logging in current folder: '{0}'", Directory.GetCurrentDirectory());
             // Configure log4net.
-            XmlConfigurator.Configure();
+            var locateFileInfo = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var parentPath = new FileInfo(Path.Combine(locateFileInfo.DirectoryName, "app.config"));
+            XmlConfigurator.Configure(parentPath);
         }
+
         public static int ConnectToFdk(string address, string login, string password, string path)
         {
             Console.WriteLine("Connecting ... ");
