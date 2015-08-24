@@ -1,5 +1,5 @@
 ---
-title: "Sample Fdk2R"
+title: "Sample rFdk"
 output:
   html_document:
     theme: united
@@ -24,7 +24,7 @@ ttConnect()
 ```{r}
 options(warn=-1)
 require(rClr)
-require(FdkRLib)
+require(rFdk)
 
 ttConnect("", "", "")
 
@@ -76,15 +76,6 @@ ttQuotesLevel2History('EURUSD', prevNow, now, depth=1)
 
 #4. Trades/Trade Reports
 
-Get trades of current account
-
-```{r}
-now <-as.POSIXct(Sys.time())
-#120 hours = 5 x 24 x 3600 seconds before now
-prevNow <-as.POSIXct(now-(5 * 24*3600))
-ttTradeRecords(prevNow, now)
-```
-
 Trades in account:
 ```{r}
 # Commented as it takes to long
@@ -94,5 +85,5 @@ head(ttTrades())
 All trades
 ```{r}
 # Commented as it takes to long
-ttTradeRecordAll()
+ttTradesHistory()
 ```

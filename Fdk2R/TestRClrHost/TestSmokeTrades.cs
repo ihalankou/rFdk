@@ -21,10 +21,13 @@ namespace TestRClrHost
         [Test]
         public void TestGetTradeRecords()
         {
-            Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.st.soft-fx.eu", "100131", "123qwe!", ""));
+            Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.st.soft-fx.eu", "100065", "123qwe!", ""));
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("", "", "", ""));
+            TradeRecord[] tradeRecords = Trade.Server.GetTradeRecords()
+                 .ToArray();
             var bars = FdkTrade.GetTradeRecords(new DateTime(1970, 1, 2), DateTime.UtcNow);
             var comission = FdkTrade.GetTradeAgentCommission(bars);
+            var profit = FdkTrade.GetTradeTakeProfit(bars);
             FdkVars.Unregister(bars);
 		}     
 		[Test]
