@@ -1,7 +1,7 @@
 #' Gets the account trades
 #' 
 #' @export
-ttTradeHistory <- function(){
+ttTradesHistory <- function(){
   symInfo = GetTradeTransactionReportAll()
   GetTradeReportDataFrame(symInfo)
 }

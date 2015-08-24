@@ -1,10 +1,8 @@
 #' Gets the account trades
 #' 
-#' @param startTime Start time of trades
-#' @param endTime End time of orders
 #' @export
-ttTrades <- function(startTime =FdkRLib::ttTimeZero(), endTime = FdkRLib::ttNow()){
-  symInfo = GetTradeRecords(startTime, endTime)
+ttTrades <- function(){
+  symInfo = GetTradeHistory()
   
   agentComission = GetTradeAgentCommission(symInfo)
   tradeClientOrderId = GetTradeClientOrderId(symInfo)
@@ -33,15 +31,13 @@ ttTrades <- function(startTime =FdkRLib::ttTimeZero(), endTime = FdkRLib::ttNow(
   UnregisterVar(symInfo)
   
   data.table(agentComission, tradeClientOrderId, tradeComment, created,
-	 expiration, symbol, initialVolume, isLimitOrder, isPendingOrder,
-   isPosition, isStopOrder, modified, orderId, price, profit, 
-   side, stopLoss, swap, takeProfit, type, volume)
+             expiration, symbol, initialVolume, isLimitOrder, isPendingOrder,
+             isPosition, isStopOrder, modified, orderId, price, profit, 
+             side, stopLoss, swap, takeProfit, type, volume)
 }
-#' Get symbol field
-#' @param startTime Start time of trades
-#' @param endTime End time of orders
-GetTradeRecords <- function(startTime, endTime) {
-  rClr::clrCallStatic('RHost.FdkTrade', 'GetTradeRecords', startTime, endTime)
+#' Get trade history
+GetTradeHistory <- function() {
+  rClr::clrCallStatic('RHost.FdkTrade', 'GetTradeHistory')
 }
 
 #' Get trade comission

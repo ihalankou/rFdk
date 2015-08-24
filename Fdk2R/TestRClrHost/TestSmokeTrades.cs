@@ -21,7 +21,7 @@ namespace TestRClrHost
         [Test]
         public void TestGetTradeRecords()
         {
-            Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.st.soft-fx.eu", "100065", "123qwe!", ""));
+            Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.st.soft-fx.eu", "100131", "123qwe!", ""));
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("", "", "", ""));
             var bars = FdkTrade.GetTradeRecords(new DateTime(1970, 1, 2), DateTime.UtcNow);
             var comission = FdkTrade.GetTradeAgentCommission(bars);
@@ -32,8 +32,7 @@ namespace TestRClrHost
 		{
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100106", "123qwe123", ""));
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("", "", "", ""));
-
-            Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100131", "123qwe!", ""));
+            Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100065", "123qwe!", ""));
             TradeRecord[] tradeRecords = Trade.Server.GetTradeRecords()
                  .ToArray();
             
