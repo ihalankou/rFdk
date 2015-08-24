@@ -23,7 +23,8 @@ namespace RHost
 		{
 			try
 			{
-				TradeRecord[] tradeRecords = Trade.Server.GetTradeRecords()
+                var allTrades = Trade.Server.GetTradeRecords();
+                TradeRecord[] tradeRecords = allTrades
 					.Where(trade=>OpenTradeTypes.Contains(trade.Type))
                     .Where(tr=>tr.Created!= null && (tr.Created >= startTime && tr.Created <= endTime))
                     .ToArray();

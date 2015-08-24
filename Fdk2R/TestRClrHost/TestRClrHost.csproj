@@ -118,7 +118,6 @@
   <ItemGroup>
     <Compile Include="InternalBugs\TtJiraSteps.cs" />
     <Compile Include="ProgramTest.cs" />
-    <Compile Include="TestAccountTradeRecords.cs" />
     <Compile Include="TestRealTimeData.cs" />
     <Compile Include="TestSymbolsData.cs" />
     <Compile Include="TestSmokeTesting.cs" />

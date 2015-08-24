@@ -3,8 +3,6 @@ using System.Linq;
 using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Reports;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace RHost
 {
@@ -19,12 +17,11 @@ namespace RHost
 		{
 			try
 			{
-				Log.InfoFormat(
-                    "FdkTradeReports.GetTradeTransactionReport( from: {0}, to: {1}",
+				Log.InfoFormat("FdkTradeReports.GetTradeTransactionReport( from: {0}, to: {1}",
 					from, to);
 
-				var tradeRecordsStream = new List<TradeTransactionReport>(1000);
-				tradeRecordsStream.AddRange(Trade.Server.GetTradeTransactionReports(TimeDirection.Forward, false, from, to).ToArray());
+				var tradeRecordsStream = Trade.Server.GetTradeTransactionReports(TimeDirection.Forward, false, from, to)
+                .ToArray().ToList();
 				var tradeRecordList = tradeRecordsStream.ToArray();
 
 				var varName = FdkVars.RegisterVariable(tradeRecordList, "tradeReports");
@@ -37,22 +34,11 @@ namespace RHost
 			}     
         }
         static readonly ILog Log = LogManager.GetLogger(typeof(FdkTradeReports));
-		public static string GetTradeTransactionReportAll(int maxSize = 1000000)
+        public static string GetTradeTransactionReportAll()
         {
-			var sw = Stopwatch.StartNew ();
-			var streamIterator = Trade.Server.GetTradeTransactionReports (TimeDirection.Forward, false, null, null, 1024);
-			var tradeRecordsStream = new List<TradeTransactionReport>();
-			var count = 0;
-			while (!streamIterator.EndOfStream) {
-				tradeRecordsStream.Add (streamIterator.Item);
-				count++;
-				if (count >= maxSize)
-					break;
-				streamIterator.Next ();
-			}
-			var ms = sw.ElapsedMilliseconds;
-			var tradeRecordList = tradeRecordsStream.ToArray();
-			Console.WriteLine ("Time for response: " + ms);
+            var tradeRecordsStream = Trade.Server.GetTradeTransactionReports(TimeDirection.Forward, false, null, null)
+                .ToArray().ToList();
+            var tradeRecordList = tradeRecordsStream.ToArray();
 
             var varName = FdkVars.RegisterVariable(tradeRecordList, "tradeReports");
             return varName;
@@ -80,7 +66,7 @@ namespace RHost
         public static double[] GetTradeCloseConversionRate(string varName)
         {
             var tradeData = FdkVars.GetValue<TradeTransactionReport[]>(varName);
-            return tradeData.SelectToArray(it => it.CloseConversionRate ?? double.NaN);
+            return tradeData.SelectToArray(it => it.CloseConversionRate ?? -1.0);
         }
 
         public static string[] GetTradeInitialVolume(string varName)
@@ -117,7 +103,7 @@ namespace RHost
         public static double[] GetTradeOpenConversionRate(string varName)
         {
             var tradeData = FdkVars.GetValue<TradeTransactionReport[]>(varName);
-            return tradeData.Select(it => it.OpenConversionRate ?? double.NaN).ToArray();
+            return tradeData.Select(it => it.OpenConversionRate ?? -1).ToArray();
         }
 
 
@@ -130,13 +116,13 @@ namespace RHost
         public static double[] GetTradeOrderFillPrice(string varName)
         {
             var tradeData = FdkVars.GetValue<TradeTransactionReport[]>(varName);
-            return tradeData.Select(it => it.OrderFillPrice ?? double.NaN).ToArray();
+            return tradeData.Select(it => it.OrderFillPrice ?? -1).ToArray();
         }
 
         public static double[] GetTradeOrderLastFillAmount(string varName)
         {
             var tradeData = FdkVars.GetValue<TradeTransactionReport[]>(varName);
-            return tradeData.Select(it => it.OrderLastFillAmount ?? double.NaN).ToArray();
+            return tradeData.Select(it => it.OrderLastFillAmount ?? -1).ToArray();
         }
 
         public static DateTime[] GetTradeOrderModified(string varName)
@@ -145,7 +131,7 @@ namespace RHost
             return tradeData.Select(it => it.OrderModified.AddUtc()).ToArray();
         }
 
-        public static double[] GetTradePositionOpenPrice(string varName)
+        public static double[] GetTradePosOpenPrice(string varName)
         {
             var tradeData = FdkVars.GetValue<TradeTransactionReport[]>(varName);
             return tradeData.Select(it => it.PosOpenPrice).ToArray();
