@@ -24,6 +24,7 @@ namespace RHost
         }
         public static int ConnectToFdk(string address, string login, string password, string path)
         {
+            Console.WriteLine("Connecting ... ");
             var result = FdkHelper.ConnectToFdk(address, login, password, path);
             if(result == 0)
             {
@@ -31,6 +32,7 @@ namespace RHost
                 var symbolInfoList = symbolInfoDic.Values.ToList();
                 SetRatesOfCurrentTime rates = new SetRatesOfCurrentTime(symbolInfoList, Calculator);
             }
+            Console.WriteLine("Done");
             return result;
         }
 
