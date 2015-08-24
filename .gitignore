@@ -32,3 +32,5 @@ Fdk2R/packages/NLog*
 *.suo
 bin
 Store/*
+examples/*.html
+examples/rsconnect/documents
