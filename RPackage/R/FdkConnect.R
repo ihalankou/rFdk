@@ -3,7 +3,10 @@
 #' @export 
 ttInit <- function() {t
   require(rClr)
-  require(data.table)
+  if(!require(data.table)){
+	  install.packages("data.table", repos="http://cran.us.r-project.org")
+	  require(data.table)
+  }
   fileName <-system.file("data", "FdkRHost.dll", package="rFdk")
   clrLoadAssembly(fileName)
 }
