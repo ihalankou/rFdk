@@ -18,7 +18,7 @@ ttGetSymbolData <- function(){
   UnregisterVar(symInfo)
   
   data.table(
-    name, precision, contractMultiplier,
+    name, precision, 
     comission, marginCurrency, profitCurrency,
     limitsComission,
     minTradeVolume, maxTradeVolume, 
