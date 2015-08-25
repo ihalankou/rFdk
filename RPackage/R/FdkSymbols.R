@@ -4,7 +4,7 @@
 ttGetSymbolData <- function(){
   symInfo = GetSymbolInfos()
   comission = GetSymbolComission(symInfo)
-  contractMultiplier = GetSymbolContractMultiplier(symInfo)
+  # contractMultiplier = GetSymbolContractMultiplier(symInfo)
   marginCurrency = GetSymbolCurrency(symInfo)
   limitsComission = GetSymbolLimitsCommission(symInfo)
   maxTradeVolume = GetSymbolMaxTradeVolume(symInfo)
