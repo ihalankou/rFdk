@@ -1,4 +1,9 @@
-
+#' Attach VS debugger
+#' 
+#' @export
+ttVsAttach <- function() {
+  rClr::clrCallStatic('RHost.FdkVars', 'LaunchDebugger')
+}
 
 #' Gets the bars pairs as requested
 #' 
