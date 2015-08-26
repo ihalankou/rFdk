@@ -26,8 +26,8 @@ namespace RHost
             
 #endif
 
-            Log.InfoFormat("FdkHelper.ConnectToFdk( address: {0}, login: {1}, password: {2}, path: {3})",
-                address, login, password, path);
+            Log.InfoFormat("FdkHelper.ConnectToFdk( address: {0}, login: {1}, password: ?????, path: {2})",
+                address, login, path);
             //Debugger.Launch();
 
             var addr = String.IsNullOrEmpty(address) ? DefaultAddress : address;

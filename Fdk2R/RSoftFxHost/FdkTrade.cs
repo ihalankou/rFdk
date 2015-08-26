@@ -4,6 +4,7 @@ using System.Linq;
 using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Financial;
+using SoftFX.Extended.Extensions;
 
 namespace RHost
 {
@@ -97,34 +98,6 @@ namespace RHost
             return tradeData.Select(it => it.Created).ExposeDatesNull();
         }
         
-        public static double[] GetTradeProfitPips(string varName)
-        {
-            var tradeData = FdkVars.GetValue<TradeRecord[]>(varName);
-            var calculator = FdkStatic.Calculator;
-
-            return tradeData.SelectToArray(it => CalculatePipsVolume(it, calculator));
-        }
-
-        public static double CalculatePipsVolume(
-            TradeRecord it, 
-            FinancialCalculator calculator)
-        {
-            double delta = it.TakeProfit ?? double.NaN;
-            var accountEntry = new AccountEntry(calculator);
-            accountEntry.Currency = "USD";
-            var tradeEntry = new TradeEntry(accountEntry);
-
-            tradeEntry.AgentCommission = it.AgentCommission;
-            tradeEntry.Commission= it.Commission;
-            tradeEntry.Side = TradeRecordSide.Buy;
-            tradeEntry.Price = it.Price;
-            tradeEntry.Symbol = it.Symbol;
-            tradeEntry.Volume = it.Volume;
-            accountEntry.Trades.Add(tradeEntry);
-            calculator.Accounts.Add(accountEntry);
-            calculator.Calculate();
-            return delta;
-        }
         public static DateTime[] GetTradeExpiration(string varName)
         {
             var tradeData = FdkVars.GetValue<TradeRecord[]>(varName);

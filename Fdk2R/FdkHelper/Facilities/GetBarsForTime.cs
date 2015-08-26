@@ -72,7 +72,7 @@ namespace FdkMinimal.Facilities
             }
 
 
-            PriceEntries pe = _calculator.Prices;
+            PriceEntries priceEntries = _calculator.Prices;
 
             var feed = FdkHelper.Wrapper.ConnectLogic.Feed;
             var server = feed.Server;
@@ -94,7 +94,7 @@ namespace FdkMinimal.Facilities
 
                 try
                 {
-                    pe.Update(sym.Name, price, price);
+                    priceEntries.Update(sym.Name, price, price);
                 }
                 catch (Exception ex)
                 {
