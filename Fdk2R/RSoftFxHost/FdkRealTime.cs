@@ -16,7 +16,8 @@ namespace RHost
 		static int _eventCount;
 		public static double MonitorSymbol(string symbol, double levelDbl)
 		{
-			try
+            Log.InfoFormat("FdkRealTime.MonitorSymbol(symbol: {0}, barPeriod: {1})", symbol, levelDbl);
+            try
 			{
                 var level = (int)levelDbl;
 				Monitors.Add(new FdkRealTimeMonitor(symbol, level, DateTime.UtcNow, _eventCount));
@@ -35,8 +36,9 @@ namespace RHost
         static readonly ILog Log = LogManager.GetLogger(typeof(FdkRealTime));
 
 		public static string SnapshotMonitoredSymbol(double id)
-		{
-			try
+        {
+            Log.InfoFormat("FdkRealTime.SnapshotMonitoredSymbol(id: {0})", id);
+            try
 			{
 				var quotes = BuildSnapshotFromMonitor(id);
 				var resultVarName = FdkVars.RegisterVariable(quotes, "rt_quotes_snapshot");

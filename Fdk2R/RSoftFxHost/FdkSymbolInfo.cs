@@ -134,7 +134,7 @@ namespace RHost
         {
             FinancialCalculator financialCalculator = FdkStatic.Calculator;
             int decimals = symbol.Precision;
-            double contractSize = symbol.ContractMultiplier;
+            double contractSize = symbol.RoundLot;
             double? rateK = financialCalculator.CalculateAssetRate(1, symbol.SettlementCurrency, "USD");
             if (!rateK.HasValue)
                 throw new InvalidOperationException(

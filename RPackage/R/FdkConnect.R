@@ -19,7 +19,9 @@ ttInit <- function() {t
 #' @export
 ttConnect <- function(address = "", login= "", password= "", fdkPath = "") {
   ttInit()
-  rClr::clrCallStatic('RHost.FdkStatic', 'ConnectToFdk', address, login, password, fdkPath)
+  result <- rClr::clrCallStatic('RHost.FdkStatic', 'ConnectToFdk', address, login, password, fdkPath)
+  ttBarsQuotesHistory(symbol = "EURUSD", barPeriodStr = "S1", startTime = ttNow()-3)
+  result
 }
 
 #' Disconnect from a TT server
