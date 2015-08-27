@@ -145,7 +145,7 @@ namespace RHost
         public static double CalculatePriceBid(SymbolInfo symbol)
         {
             FinancialCalculator financialCalculator = FdkStatic.Calculator;
-            double? rateK = financialCalculator.CalculateAssetRate(1, symbol.SettlementCurrency, "USD");
+            double? rateK = financialCalculator.CalculateAssetRate(1, symbol.Currency, symbol.SettlementCurrency);
             if (!rateK.HasValue)
                 return double.NaN;
             return rateK.Value;
