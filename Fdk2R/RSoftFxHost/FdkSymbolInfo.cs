@@ -139,7 +139,7 @@ namespace RHost
             if (!rateK.HasValue)
                 throw new InvalidOperationException(
                     string.Format("No rate for currency pair: {0}/USD", symbol.SettlementCurrency));
-            double formula = Math.Pow(10, -decimals) * contractSize * rateK.Value;
+            double formula = Math.Pow(10, -decimals) * contractSize / rateK.Value;
             return formula;
         }
         public static double CalculatePriceBid(SymbolInfo symbol)

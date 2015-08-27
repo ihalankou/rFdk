@@ -123,11 +123,28 @@ namespace RHost
 				return null;
         }
 
-        public static T GetFieldByName<T>(string fieldName)
+        static void ValidateAllAscii(string text)
         {
+            foreach(var c in text){
+                if(c>=128)
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "Field's text: '{0}' is invalid. It does not use English characters", text)
+                        );
+            }
+        }
+
+        public static T GetFieldByName<T>(string fieldName, bool toUpperCase = false)
+        {
+            ValidateAllAscii(fieldName);
             var barPeriodField = typeof(T).GetField(fieldName);
             if (barPeriodField == null)
-                return default(T);
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                            "Field's text: '{0}' is invalid. It was not a valid value", fieldName)
+                            );
+            }
 
             var result = (T)barPeriodField.GetValue(null);
 
