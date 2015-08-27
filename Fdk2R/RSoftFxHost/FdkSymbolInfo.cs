@@ -135,24 +135,13 @@ namespace RHost
             FinancialCalculator financialCalculator = FdkStatic.Calculator;
             int decimals = symbol.Precision;
             double contractSize = symbol.ContractMultiplier;
-            double? exchangeRate = GetSymbolPairsRate(symbol.SettlementCurrency, symbol.Currency,  financialCalculator);
-            double? rateK = GetSymbolPairsRate(symbol.Currency, "USD", financialCalculator);
-            double formula = Math.Pow(10, -decimals) * contractSize * exchangeRate.Value * rateK.Value;
+            double? rateK = financialCalculator.CalculateAssetRate(1, symbol.SettlementCurrency, "USD");
+            if (!rateK.HasValue)
+                throw new InvalidOperationException(
+                    string.Format("No rate for currency pair: {0}/USD", symbol.SettlementCurrency));
+            double formula = Math.Pow(10, -decimals) * contractSize * rateK.Value;
             return formula;
         }
-
-        static double? GetSymbolPairsRate(string assetCurrency, string currency, FinancialCalculator financialCalculator, bool isBidPrice = true)
-        {
-            double? rateK = financialCalculator.CalculateAssetRate(isBidPrice ? 1 : -1, assetCurrency, currency);
-            if (!rateK.HasValue)
-            {
-                throw new InvalidOperationException(
-                    string.Format("No rate for currency pair: {0}/{1}", assetCurrency, currency));
-            }
-
-            return rateK;
-        }
-
         public static double CalculatePriceBid(SymbolInfo symbol)
         {
             FinancialCalculator financialCalculator = FdkStatic.Calculator;

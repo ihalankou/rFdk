@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace RHost
 {
     public static class FdkVars
     {
-
         static FdkVars()
         {
 
@@ -54,11 +52,6 @@ namespace RHost
         public static void ClearAll()
         {
             Vars.Clear();
-        }
-
-        public static void LaunchDebugger()
-        {
-            Debugger.Launch();
         }
 
         public static T GetValue<T>(string varName)

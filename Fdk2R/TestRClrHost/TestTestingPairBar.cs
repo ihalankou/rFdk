@@ -11,11 +11,9 @@ namespace TestRClrHost
         public void TestBarPairs()
         {
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100106", "123qwe123", ""));
-            Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.st.soft-fx.eu", "100131", "123qwe!", @"C:\FdkCaches\Cache3"));
+            Assert.AreEqual(0, FdkHelper.ConnectToFdk("", "", "", @"C:\FdkCaches\Cache3"));
             var time = DateTime.Now;
-            //var prevHour = time.AddYears(-10);
-
-            var prevHour = new DateTime(2015, 8, 25, 11, 16, 16);
+            var prevHour = time.AddYears(-10);
 
             var timeDouble = FdkHelper.GetCreatedEpoch(time);
 
