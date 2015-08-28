@@ -66,7 +66,9 @@ namespace FdkMinimal.Facilities
             foreach (var sym in Symbols)
             {
                 var symbolValue = sym.Value;
-                SymbolEntry symbolEntry = new SymbolEntry(_calculator, sym.Key, symbolValue.Currency, symbolValue.SettlementCurrency);
+                SymbolEntry symbolEntry = new SymbolEntry(_calculator, sym.Key, 
+                    symbolValue.SettlementCurrency,
+                    symbolValue.Currency);
                 symbolEntry.ContractSize = symbolValue.RoundLot;
                 symbolEntry.MarginFactor= symbolValue.MarginFactor;
                 symbolEntry.Hedging = symbolValue.MarginHedge;
@@ -77,17 +79,17 @@ namespace FdkMinimal.Facilities
 
             PriceEntries priceEntries = _calculator.Prices;
 
-            var feed = FdkHelper.Wrapper.ConnectLogic.Feed;
-            var server = feed.Server;
+            DataFeed feed = FdkHelper.Wrapper.ConnectLogic.Feed;
+            IDataFeedServer server = feed.Server;
             server.SubscribeToQuotes(_symbolInfoDic.Select(sym => sym.Name), 1);
-            var autoResetEvent = new AutoResetEvent(true);
+            AutoResetEvent autoResetEvent = new AutoResetEvent(true);
             feed.Tick += (arg, ev) => autoResetEvent.Set();
             autoResetEvent.WaitOne();
             Thread.Sleep(100);
 
             _symbolInfoDic.Each(sym =>
             {
-                var retries = 5;
+                int retries = 5;
                 double price;
                 while (!FdkHelper.Wrapper.ConnectLogic.Feed.Cache.TryGetBid(sym.Name, out price) && retries > 0)
                 {
