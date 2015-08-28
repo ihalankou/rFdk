@@ -1507,11 +1507,6 @@
             Gets a value indicating whether the comment appears other tokens on that line.
             </summary>
         </member>
-        <member name="T:YamlDotNet.SerializableAttribute">
-            <summary>
-            Mock SerializableAttribute to avoid having to add #if all over the place
-            </summary>
-        </member>
         <member name="M:YamlDotNet.ReflectionExtensions.HasDefaultConstructor(System.Type)">
             <summary>
             Determines whether the specified type has a default constructor.
@@ -3151,6 +3146,11 @@
             Loads the stream from the specified input.
             </summary>
             <param name="input">The input.</param>
+        </member>
+        <member name="M:YamlDotNet.RepresentationModel.YamlStream.Load(YamlDotNet.Core.EventReader)">
+            <summary>
+            Loads the stream from the specified <see cref="T:YamlDotNet.Core.EventReader"/>.
+            </summary>
         </member>
         <member name="M:YamlDotNet.RepresentationModel.YamlStream.Save(System.IO.TextWriter)">
             <summary>
