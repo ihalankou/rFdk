@@ -44,6 +44,7 @@ namespace TestRClrHost
             //FdkSymbolInfo.RegisterToFeed(FdkSymbolInfo.Feed, calculator);
             //Thread.Sleep(1000);
             double volumeByHand = FdkSymbolInfo.CalculatePipsValue(symFirst);
+            double priceBid = FdkSymbolInfo.CalculatePriceBid(symFirst);
 		}
  	
         [Test]

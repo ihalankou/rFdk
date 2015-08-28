@@ -147,10 +147,10 @@ namespace RHost
         public static double CalculatePriceBid(SymbolInfo symbol)
         {
             FinancialCalculator financialCalculator = FdkStatic.Calculator;
-            double? rateK = financialCalculator.ConvertYToZ(1, symbol.Name, symbol.SettlementCurrency);
-            if (!rateK.HasValue)
+            PriceEntry? priceEntry = financialCalculator.Prices.TryGetPriceEntry(symbol.Name);
+            if (!priceEntry.HasValue)
                 return double.NaN;
-            return rateK.Value;
+            return priceEntry.Value.Bid;
         }
     }
 }

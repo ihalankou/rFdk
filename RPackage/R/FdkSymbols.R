@@ -14,8 +14,8 @@ ttGetSymbolData <- function(){
   profitCurrency = GetSymbolSettlementCurrency(symInfo)
   swapLong = GetSymbolSwapSizeLong(symInfo)
   swapShort = GetSymbolSwapSizeShort(symInfo)
-  pipsValue = GetSymbolPipsValue(symInfo)
-  priceBid = GetSymbolCurrentPriceBid(symInfo)
+  pipValueLong = GetSymbolPipsValue(symInfo)
+  currentPriceBid = GetSymbolCurrentPriceBid(symInfo)
   
   UnregisterVar(symInfo)
   
@@ -25,7 +25,7 @@ ttGetSymbolData <- function(){
     limitsComission,
     minTradeVolume, maxTradeVolume, 
     swapLong, swapShort,
-	pipsValue, priceBid
+	pipValueLong, currentPriceBid
     )
 }
 #' Get symbol field
