@@ -134,17 +134,15 @@ namespace RHost
         {
             FinancialCalculator financialCalculator = FdkStatic.Calculator;
             int decimals = symbol.Precision;
-            double contractSize = symbol.RoundLot;
-            double? rateK = financialCalculator.ConvertYToZ(1, symbol.Name, "USD");
-            if (!rateK.HasValue)
+            double? amountZ = financialCalculator.ConvertYToZ(Math.Pow(10, -decimals) * symbol.RoundLot, symbol.Name, "USD");
+            if (!amountZ.HasValue)
             { 
                 Log.WarnFormat("No rate for currency pair: {0}/USD", symbol.Name);
                 return double.NaN;
              //   throw new InvalidOperationException(
                //     string.Format("No rate for currency pair: {0}/USD", symbol.Name));
             }
-            double formula = Math.Pow(10, -decimals) * contractSize / rateK.Value;
-            return formula;
+            return amountZ.Value;
         }
         public static double CalculatePriceBid(SymbolInfo symbol)
         {

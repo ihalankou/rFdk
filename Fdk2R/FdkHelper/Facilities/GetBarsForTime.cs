@@ -67,7 +67,10 @@ namespace FdkMinimal.Facilities
             {
                 var symbolValue = sym.Value;
                 SymbolEntry symbolEntry = new SymbolEntry(_calculator, sym.Key, symbolValue.Currency, symbolValue.SettlementCurrency);
+                symbolEntry.ContractSize = symbolValue.RoundLot;
+                symbolEntry.MarginFactor= symbolValue.MarginFactor;
                 symbolEntry.Hedging = symbolValue.MarginHedge;
+
                 _calculator.Symbols.Add(symbolEntry);
             }
 

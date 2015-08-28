@@ -20,7 +20,6 @@ ttInit <- function() {t
 ttConnect <- function(address = "", login= "", password= "", fdkPath = "") {
   ttInit()
   result <- rClr::clrCallStatic('RHost.FdkStatic', 'ConnectToFdk', address, login, password, fdkPath)
-  ttBarsQuotesHistory(symbol = "EURUSD", barPeriodStr = "S1", startTime = ttNow()-3)
   result
 }
 
