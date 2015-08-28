@@ -34,3 +34,5 @@ bin
 Store/*
 examples/*.html
 examples/rsconnect/documents
+Fdk2R/packages/FDK.*
+Fdk2R/packages/YamlDotNet.*
