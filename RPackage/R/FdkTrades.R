@@ -1,7 +1,7 @@
 #' Gets the account trades
 #' 
 #' @export
-ttTrades <- function(){
+ttTrade.Open <- function(){
   symInfo = GetTradeHistory()
   
   agentComission = GetTradeAgentCommission(symInfo)

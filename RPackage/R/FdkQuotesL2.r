@@ -6,7 +6,7 @@
 #' @param endTime Ending time. Use ttGetEpochFromText if you want to take from text a valid date.
 #' @param depth The market depth. Default is 2
 #' @export
-ttQuotesLevel2History <- function(symbol,startTime, endTime, depth = 1){
+ttFeed.TickLevel2History <- function(symbol,startTime, endTime, depth = 2){
   quotesHistory <- GetQuotePacked(symbol,startTime, endTime, depth)
   
   createTime <- QuotesL2CreatingTime(quotesHistory)

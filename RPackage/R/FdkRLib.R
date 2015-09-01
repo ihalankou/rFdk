@@ -1,9 +1,4 @@
-#' Attach VS debugger
-#' 
-#' @export
-ttVsAttach <- function() {
-  rClr::clrCallStatic('RHost.FdkVars', 'LaunchDebugger')
-}
+
 
 #' Gets the bars pairs as requested
 #' 
@@ -26,7 +21,6 @@ ttGetBarsInfo <- function(symbol, priceTypeStr, barPeriodStr) {
 
 #' Get the list of referenced variables
 #' 
-#' @export
 ttVarList <- function() {
   rClr::clrCallStatic('RHost.FdkVars', 'GetVarNames')
 }
@@ -34,7 +28,6 @@ ttVarList <- function() {
 #' unregister a variable
 #' 
 #' @param varName .Net variable to be removed
-#' @export
 UnregisterVar <- function(varName) {
   rClr::clrCallStatic('RHost.FdkVars', 'Unregister', varName)
 }
@@ -42,29 +35,7 @@ UnregisterVar <- function(varName) {
 #' Clear the environment variables
 #' 
 #' @param varName .Net variable to be removed
-#' @export
 ttUnregisterAllVariables <- function(varName) {
   rClr::clrCallStatic('RHost.FdkVars', 'ClearAll', varName)
-}
-
-#' Gives a default time (equivalent with NULL/NA/null)
-#' 
-#' @export
-ttTimeZero <- function(){
-  tm <- as.POSIXct(0, origin = "1970-01-02")
-}
-#' Gives current time
-#' 
-#' @export
-ttNow <- function(){
-  tm <- Sys.time()
-}
-
-#' Gets the epoch (double) time from a .Net date
-#' 
-#' @param currentTime .Net invariant time 
-#' @export
-ttGetEpochFromText <- function(currentTime) {
-  rClr::clrCallStatic('RHost.FdkHelper', 'GetCreatedEpochFromText', currentTime)
 }
 

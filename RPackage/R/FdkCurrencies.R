@@ -1,7 +1,7 @@
 #' Gets the symbol info
 #' 
 #' @export
-ttGetCurrencyData <- function(){
+ttConf.Currency <- function(){
   symInfo = GetCurrencyInfos()
   
   currency = GetCurrencyName(symInfo)

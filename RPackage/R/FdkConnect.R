@@ -1,12 +1,8 @@
 #' Initialize the CLR runtime and loads the FDK host assembly
 #' 
-#' @export 
 ttInit <- function() {t
   require(rClr)
-  if(!require(data.table)){
-	  install.packages("data.table", repos="http://cran.us.r-project.org")
-	  require(data.table)
-  }
+  require(data.table)
   fileName <-system.file("data", "FdkRHost.dll", package="rFdk")
   clrLoadAssembly(fileName)
 }
@@ -19,8 +15,7 @@ ttInit <- function() {t
 #' @export
 ttConnect <- function(address = "", login= "", password= "", fdkPath = "") {
   ttInit()
-  result <- rClr::clrCallStatic('RHost.FdkStatic', 'ConnectToFdk', address, login, password, fdkPath)
-  result
+  rClr::clrCallStatic('RHost.FdkStatic', 'ConnectToFdk', address, login, password, fdkPath)
 }
 
 #' Disconnect from a TT server
@@ -30,10 +25,3 @@ ttDisconnect <- function() {
   rClr::clrCallStatic('RHost.FdkStatic', 'Disconnect')
 }
 
-#' Displays a DateTime
-#' 
-#' @param dateToShow An R datetime
-#' @export
-ttDisplayDate <- function(dateToShow) {
-  rClr::clrCallStatic('RHost.FdkStatic', 'DisplayDate', dateToShow)
-}

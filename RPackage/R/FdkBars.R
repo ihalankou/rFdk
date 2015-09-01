@@ -8,19 +8,12 @@
 #' @param endTime End of time interval. If startTime is not set, the bar count is taken from barCount variable
 #' @param barCount Number of items of startTime is not set 
 #' @export
-ttBarsHistory <- function(symbol, 
+ttFeed.BarHistory <- function(symbol, 
      priceTypeStr="Bid", barPeriodStr = "M1", 
-     startTime= ttTimeZero() , endTime = ttNow(),
+     startTime= as.POSIXct(0, origin = "1970-01-02"), endTime = Sys.time(),
      barCount = 10000
      ){
   symbolBars <- ComputeBarsRange(symbol, priceTypeStr, barPeriodStr, startTime, endTime, barCount)
-  getBarsFrame(symbolBars)
-}
-
-#' Extracts bar array data as a full data frame
-#' 
-#' @param symbolBars Bars array variable
-getBarsFrame <- function(symbolBars){
   
   high <- BarHighs(symbolBars)
   low <- BarLows(symbolBars)
