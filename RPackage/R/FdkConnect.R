@@ -1,9 +1,17 @@
 #' Initialize the CLR runtime and loads the FDK host assembly
 #' 
-#' @export 
 ttInit <- function() {t
   require(rClr)
-  require(data.table)
+  if(!require(stringi))
+  {
+    install.packages("stringi")
+    require(stringi)
+  }
+  if(!require(data.table))
+  {
+    install.packages("data.table")
+    require(data.table)
+  }
   fileName <-system.file("data", "FdkRHost.dll", package="rFdk")
   clrLoadAssembly(fileName)
 }
@@ -26,10 +34,3 @@ ttDisconnect <- function() {
   rClr::clrCallStatic('RHost.FdkStatic', 'Disconnect')
 }
 
-#' Displays a DateTime
-#' 
-#' @param dateToShow An R datetime
-#' @export
-ttDisplayDate <- function(dateToShow) {
-  rClr::clrCallStatic('RHost.FdkStatic', 'DisplayDate', dateToShow)
-}

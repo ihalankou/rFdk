@@ -1,7 +1,7 @@
 #' Gets the symbol info
 #' 
 #' @export
-ttGetSymbolData <- function(){
+ttConf.Symbol <- function(){
   symInfo = GetSymbolInfos()
   comission = GetSymbolComission(symInfo)
   # contractMultiplier = GetSymbolContractMultiplier(symInfo)
