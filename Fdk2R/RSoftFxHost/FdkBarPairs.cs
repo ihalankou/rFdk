@@ -18,16 +18,16 @@ namespace RHost
 		/// <param name="endTime"></param>
 		/// <param name="barCountDbl"></param>
 		/// <returns></returns>
-        public static string ComputeGetPairBars(string symbol, string barPeriodStr, DateTime startTime, DateTime endTime, double barCountDbl)
-		{
-			try 
-			{
+        public static string ComputeGetPairBars(string barPeriodStr, string symbol,  DateTime startTime, DateTime endTime, double barCountDbl)
+        {
+            Log.InfoFormat("FdkBarPairs.ComputeBarPairs( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
+                symbol, barPeriodStr, startTime, endTime, barCountDbl);
+            
+            try
+            {
 				var barPeriod = FdkHelper.GetFieldByName<BarPeriod>(barPeriodStr);
 				if (barPeriod == null)
 					return String.Empty;
-
-				Log.InfoFormat("FdkBarPairs.ComputeBarPairs( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
-					symbol, barPeriodStr, startTime, endTime, barCountDbl);
 
 				PairBar[] barsData;
 				if (FdkHelper.IsTimeZero(startTime))

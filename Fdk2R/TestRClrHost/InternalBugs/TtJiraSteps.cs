@@ -42,7 +42,7 @@ namespace TestRClrHost.InternalBugs
 
             var prevNow = new DateTime(2015, 7, 7, 18, 30, 00);
             var now = new DateTime(2015, 7, 7, 19, 00, 00);
-            var varPairBars = FdkBarPairs.ComputeGetPairBars("#SPX", "M30", prevNow, now, 10000);
+            var varPairBars = FdkBarPairs.ComputeGetPairBars("#SPX", "M30" , prevNow, now, 10000);
 
             FdkVars.Unregister(varPairBars);
             FdkHelper.Disconnect();
@@ -55,7 +55,7 @@ namespace TestRClrHost.InternalBugs
 
             var prevNow = new DateTime(2015, 7, 7, 18, 30, 00);
             var now = new DateTime(2015, 7, 7, 19, 00, 00);
-            FdkBarPairs.ComputeGetPairBars("#SPX", "M30", prevNow, now, 0);
+            FdkBarPairs.ComputeGetPairBars("#SPX", "M30" , prevNow, now, 0);
 
             //RHost.FdkBarPairs
 

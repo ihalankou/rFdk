@@ -19,7 +19,7 @@ namespace RHost
     public static class FdkStatic
     {
 
-        static FinancialCalculator Calculator { get; set; }
+        public static FinancialCalculator Calculator { get; set; }
         static FdkStatic()
         {
             Calculator = new FinancialCalculator();
@@ -78,6 +78,7 @@ namespace RHost
                 var symbolInfoDic = FdkHelper.Wrapper.GetSymbolsDict();
                 var symbolInfoList = symbolInfoDic.Values.ToList();
                 SetRatesOfCurrentTime rates = new SetRatesOfCurrentTime(symbolInfoList, Calculator);
+                rates.Process();
             }
             Console.WriteLine("Done");
             return result;

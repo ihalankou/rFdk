@@ -1237,6 +1237,26 @@
             <param name="currency">Deposit currency.</param>
             <returns>Rate or null if rate cannot be calculated.</returns>
         </member>
+        <member name="M:SoftFX.Extended.Extensions.FinancialCalculatorExtensions.ConvertYToZ(SoftFX.Extended.Financial.FinancialCalculator,System.Double,System.String,System.String)">
+            <summary>
+             Converts volume in currency Y to currency Z (profit currency to deposit currency)
+            </summary>
+            <param name="calculator">Financial calculator.</param>
+            <param name="amount">Volume.</param>
+            <param name="symbol">Symbol X/Y.</param>
+            <param name="depositCurrency">Deposit currency.</param>
+            <returns>Rate or null if rate cannot be calculated.</returns>
+        </member>
+        <member name="M:SoftFX.Extended.Extensions.FinancialCalculatorExtensions.ConvertXToZ(SoftFX.Extended.Financial.FinancialCalculator,System.Double,System.String,System.String)">
+            <summary>
+             Converts volume in currency X to currency Z (margin currency to deposit currency)
+            </summary>
+            <param name="calculator">Financial calculator.</param>
+            <param name="amount">Volume.</param>
+            <param name="symbol">Symbol X/Y.</param>
+            <param name="depositCurrency">Deposit currency.</param>
+            <returns>Rate or null if rate cannot be calculated.</returns>
+        </member>
         <member name="T:SoftFX.Extended.Extensions.SymbolInfoExtensions">
             <summary>
             Extensions for SymbolInfo class.

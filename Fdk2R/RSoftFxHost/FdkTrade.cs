@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using log4net;
 using SoftFX.Extended;
+using SoftFX.Extended.Financial;
+using SoftFX.Extended.Extensions;
 
 namespace RHost
 {
@@ -95,8 +97,7 @@ namespace RHost
             var tradeData = FdkVars.GetValue<TradeRecord[]>(varName);
             return tradeData.Select(it => it.Created).ExposeDatesNull();
         }
-
-
+        
         public static DateTime[] GetTradeExpiration(string varName)
         {
             var tradeData = FdkVars.GetValue<TradeRecord[]>(varName);

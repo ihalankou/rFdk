@@ -9,6 +9,7 @@ namespace RHost
 	{
 		public static string GetCurrencyInfos()
 		{
+            Log.Info("FdkCurrencyInfo.GetCurrencyInfos");
 			try
 			{
 				var symbolInfos = FdkHelper.Wrapper.ConnectLogic.Feed.Cache.Currencies;

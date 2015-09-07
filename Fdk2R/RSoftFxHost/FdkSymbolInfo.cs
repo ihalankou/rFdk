@@ -2,6 +2,9 @@
 using System.Linq;
 using log4net;
 using SoftFX.Extended;
+using SoftFX.Extended.Extensions;
+using SoftFX.Extended.Financial;
+using SoftFX.Extended.Events;
 
 namespace RHost
 {
@@ -11,7 +14,7 @@ namespace RHost
 		{
 			try
 			{
-				var symbolInfos = FdkHelper.Wrapper.ConnectLogic.Feed.Cache.Symbols;
+                var symbolInfos = Symbols;
 				var varName = FdkVars.RegisterVariable(symbolInfos, "symbolsInfo");
 				return varName;
 			}
@@ -20,6 +23,33 @@ namespace RHost
 				Log.Error(ex);
 				throw;
 			}     
+        }
+
+        public static void RegisterToFeed(DataFeed feed, FinancialCalculator calculator)
+        {
+            feed.Tick += (object sender, TickEventArgs e) =>
+            {
+                calculator.Prices.Update(e.Tick.Symbol, e.Tick.Bid, e.Tick.Ask);
+            };
+            feed.Server.SubscribeToQuotes(Symbols.Select(symbol=>symbol.Name), 1);            
+        }
+
+
+
+        public static SymbolInfo[] Symbols
+        {
+            get
+            {
+                return Feed.Cache.Symbols;
+            }
+        }
+
+        public static DataFeed Feed
+        {
+            get
+            {
+                return FdkHelper.Wrapper.ConnectLogic.Feed;
+            }
         }
         static readonly ILog Log = LogManager.GetLogger(typeof(FdkSymbolInfo));
 
@@ -85,6 +115,42 @@ namespace RHost
         {
             var symbolInfos = FdkVars.GetValue<SymbolInfo[]>(symbolsInfo);
             return symbolInfos.SelectToArray(b => b.SwapSizeShort ?? double.NaN);
+        }
+
+        public static double[] GetSymbolPipsValue(string symbolsInfo)
+        {
+            var symbolInfos = FdkVars.GetValue<SymbolInfo[]>(symbolsInfo);
+            return symbolInfos.SelectToArray(b => CalculatePipsValue(b));
+        }
+
+
+        public static double[] GetSymbolCurrentPriceBid(string symbolsInfo)
+        {
+            SymbolInfo[] symbolInfos = FdkVars.GetValue<SymbolInfo[]>(symbolsInfo);
+            return symbolInfos.SelectToArray(b => CalculatePriceBid(b));
+        }
+
+        public static double CalculatePipsValue(SymbolInfo symbol)
+        {
+            FinancialCalculator financialCalculator = FdkStatic.Calculator;
+            int decimals = symbol.Precision;
+            double? amountZ = financialCalculator.ConvertYToZ(Math.Pow(10, -decimals) * symbol.RoundLot, symbol.Name, "USD");
+            if (!amountZ.HasValue)
+            { 
+                Log.WarnFormat("No rate for currency pair: {0}/USD", symbol.Name);
+                return double.NaN;
+             //   throw new InvalidOperationException(
+               //     string.Format("No rate for currency pair: {0}/USD", symbol.Name));
+            }
+            return amountZ.Value;
+        }
+        public static double CalculatePriceBid(SymbolInfo symbol)
+        {
+            FinancialCalculator financialCalculator = FdkStatic.Calculator;
+            PriceEntry? priceEntry = financialCalculator.Prices.TryGetPriceEntry(symbol.Name);
+            if (!priceEntry.HasValue)
+                return double.NaN;
+            return priceEntry.Value.Bid;
         }
     }
 }

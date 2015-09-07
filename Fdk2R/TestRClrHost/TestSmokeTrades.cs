@@ -35,13 +35,16 @@ namespace TestRClrHost
 		{
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100106", "123qwe123", ""));
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("", "", "", ""));
-            Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100065", "123qwe!", ""));
-            TradeRecord[] tradeRecords = Trade.Server.GetTradeRecords()
-                 .ToArray();
-            
-            var firstTrade = tradeRecords.FirstOrDefault();
-            Assert.IsNotNull(firstTrade);
+            //Assert.AreEqual(0, FdkStatic.ConnectToFdk("tp.st.soft-fx.eu", "100065", "123qwe!", ""));
+            Assert.AreEqual(0, FdkStatic.ConnectToFdk("", "", "", ""));
+            var calculator = FdkStatic.Calculator;
+            var symbols = FdkSymbolInfo.Symbols;
+            var symFirst = symbols.First(sym=>sym.Name=="EURUSD");
 
+            //FdkSymbolInfo.RegisterToFeed(FdkSymbolInfo.Feed, calculator);
+            //Thread.Sleep(1000);
+            double volumeByHand = FdkSymbolInfo.CalculatePipsValue(symFirst);
+            double priceBid = FdkSymbolInfo.CalculatePriceBid(symFirst);
 		}
  	
         [Test]
