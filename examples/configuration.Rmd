@@ -30,7 +30,7 @@ ttConnect("", "", "")
 
 Get symbol and currency data
 ```{r}
-ttGetSymbolData()
+ttConf.Symbol()
 
-ttGetCurrencyData()
+ttConf.Currency()
 ```

@@ -20,29 +20,29 @@ A simple code sample code is the following:
 ttConnect("", "", "")
 
 #Get configuration information of your account
-head(ttGetSymbolData())
-head(ttGetCurrencyData())
+head(ttConf.Symbol())
+head(ttConf.Currency())
 
 #Quotes in the last 5 minutes
 now <-as.POSIXct(Sys.time())
 # 300 seconds from present
 prevNow <-as.POSIXct(now-(5*60))
-head(ttQuotesHistory("EURUSD", startTime = prevNow, endTime=now))
+head(ttFeed.TickBestHistory("EURUSD", startTime = prevNow, endTime=now))
 
 # Get quotes level 2
 # 1000 seconds from present
 now <-as.POSIXct(Sys.time())
 prevNow <-as.POSIXct(now-1000)
-qt2= ttQuotesLevel2History('EURUSD', prevNow, now)
+qt2= ttFeed.TickLevel2History('EURUSD', prevNow, now)
 head(qt2)
 ```
 Follow this link with expanded example and output:
 
 Configuration:
-http://rpubs.com/ciplogic/105460
+http://rpubs.com/ciplogic/107672
 
 History:
-http://rpubs.com/ciplogic/105462
+http://rpubs.com/ciplogic/107673
 
 Trades:
-http://rpubs.com/ciplogic/105463
+http://rpubs.com/ciplogic/107674
