@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 
@@ -12,7 +13,7 @@ namespace RHost
             Log.Info("FdkCurrencyInfo.GetCurrencyInfos");
 			try
 			{
-				var symbolInfos = FdkHelper.Wrapper.ConnectLogic.Feed.Cache.Currencies;
+				var symbolInfos = FdkHelper.Feed.Cache.Currencies;
 				var varName = FdkVars.RegisterVariable(symbolInfos, "currencyInfo");
 				return varName;
 			}

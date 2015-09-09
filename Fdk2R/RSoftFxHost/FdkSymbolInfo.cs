@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Extensions;
@@ -48,7 +49,7 @@ namespace RHost
         {
             get
             {
-                return FdkHelper.Wrapper.ConnectLogic.Feed;
+                return FdkHelper.Feed;
             }
         }
         static readonly ILog Log = LogManager.GetLogger(typeof(FdkSymbolInfo));

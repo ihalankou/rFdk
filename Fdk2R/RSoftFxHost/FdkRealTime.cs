@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Events;
@@ -99,7 +100,7 @@ namespace RHost
         
         static DataFeed Feed
         {
-            get { return FdkHelper.Wrapper.ConnectLogic.Feed; }
+            get { return FdkHelper.Feed; }
         }
 
         public static bool IsMonitoringStarted { get; set; }

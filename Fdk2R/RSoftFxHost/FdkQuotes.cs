@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 
@@ -30,7 +31,7 @@ namespace RHost
 
         public static Quote[] CalculateHistoryForSymbolArray(string symbol, DateTime startTime, DateTime endTime, int depth)
         {
-            return FdkHelper.Wrapper.ConnectLogic.Storage.Online.GetQuotes(symbol, startTime, endTime, depth);
+            return FdkHelper.Storage.Online.GetQuotes(symbol, startTime, endTime, depth);
         }
 
         public static double[] QuotesAsk(string bars)

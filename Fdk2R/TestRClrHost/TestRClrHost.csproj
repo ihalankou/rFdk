@@ -98,11 +98,19 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FdkMinimal">
+      <HintPath>..\..\Lib\FdkMinimal\FdkMinimal.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="SoftFX.Lrp">
-      <HintPath>..\..\Lib\FDK\SoftFX.Lrp.dll</HintPath>
+    <Reference Include="SoftFX.Extended.Net, Version=1.0.0.1, Culture=neutral, PublicKeyToken=4233fb54369c191f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\FdkMinimal\SoftFX.Extended.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftFX.Lrp, Version=1.0.1.0, Culture=neutral, PublicKeyToken=4233fb54369c191f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\FdkMinimal\SoftFX.Lrp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -111,9 +119,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="SoftFX.Extended.Net">
-      <HintPath>..\..\Lib\FDK\SoftFX.Extended.Net.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InternalBugs\TtJiraSteps.cs" />
@@ -130,10 +135,6 @@
     <Compile Include="TestTestingPairBar.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FdkHelper\FdkMinimal.csproj">
-      <Project>{c8e8bced-4a13-4521-853a-8160393d67a3}</Project>
-      <Name>FdkMinimal</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RSoftFxHost\FdkRHost.csproj">
       <Project>{6B485272-EF8E-47F3-AEE5-F3418B39DE80}</Project>
       <Name>FdkRHost</Name>

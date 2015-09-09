@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Financial;
@@ -12,7 +13,7 @@ namespace RHost
 	{
 		static DataTrade Trade
 		{
-			get { return FdkHelper.Wrapper.ConnectLogic.TradeWrapper.Trade; }
+			get { return FdkHelper.Trade; }
 		}
 
 		static readonly TradeRecordType[] OpenTradeTypes = 

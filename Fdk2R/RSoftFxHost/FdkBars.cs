@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FdkMinimal;
 using SoftFX.Extended;
 using SoftFX.Extended.Storage;
 using log4net;
@@ -55,23 +56,23 @@ namespace RHost
 		static Bar[] CalculateBarsForSymbolArray(
 			string symbol, PriceType priceType, DateTime startTime, BarPeriod barPeriod, int barCount)
 		{
-			return FdkHelper.Wrapper.ConnectLogic.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, -barCount).ToArray();
+			return FdkHelper.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, -barCount).ToArray();
 		}
 
 		static Bar[] CalculateBarsForSymbolArrayRangeTime(
 			string symbol, PriceType priceType, DateTime startTime, DateTime endTime, BarPeriod barPeriod)
 		{
-			return FdkHelper.Wrapper.ConnectLogic.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, endTime).ToArray();
+			return FdkHelper.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, endTime).ToArray();
 		}
 
 		static HistoryInfo GetQuotesInfo(string symbol, int depth)
 		{
-			return FdkHelper.Wrapper.ConnectLogic.Storage.Online.GetQuotesInfo(symbol, depth);
+			return FdkHelper.Storage.Online.GetQuotesInfo(symbol, depth);
 		}
 
 		static HistoryInfo GetBarsInfo(string symbol, PriceType priceType, BarPeriod period)
 		{
-			return FdkHelper.Wrapper.ConnectLogic.Storage.Online.GetBarsInfo(symbol, priceType, period);
+			return FdkHelper.Storage.Online.GetBarsInfo(symbol, priceType, period);
 		}
 
 		#endregion

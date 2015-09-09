@@ -1,4 +1,5 @@
 ﻿using System;
+using FdkMinimal;
 using NUnit.Framework;
 using RHost;
 using SoftFX.Extended;

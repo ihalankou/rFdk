@@ -8,6 +8,7 @@ using NUnit.Framework;
 using RHost;
 using SoftFX.Extended;
 using SoftFX.Extended.Events;
+using FdkMinimal;
 
 namespace TestRClrHost
 {
@@ -16,7 +17,7 @@ namespace TestRClrHost
 	{		
 		static DataTrade Trade
 		{
-			get { return FdkHelper.Wrapper.ConnectLogic.TradeWrapper.Trade; }
+			get { return FdkHelper.Trade; }
 		}
         [Test]
         public void TestGetTradeRecords()

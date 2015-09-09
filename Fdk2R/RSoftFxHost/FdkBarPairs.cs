@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 
@@ -51,12 +52,12 @@ namespace RHost
         }
 		static PairBar[] GetPairBarsSymbolArray(string symbol, BarPeriod period, DateTime startTime, int barsNumber)
         {
-            return FdkHelper.Wrapper.ConnectLogic.Storage.Online.GetPairBars(symbol, period, startTime, barsNumber).ToArray();
+            return FdkHelper.Storage.Online.GetPairBars(symbol, period, startTime, barsNumber).ToArray();
         }
 
         internal static PairBar[] GetPairBarsSymbolArrayRangeTime(string symbol, BarPeriod period, DateTime startTime, DateTime endTime)
         {
-            return FdkHelper.Wrapper.ConnectLogic.Storage.Online.GetPairBars(symbol, period, startTime, endTime).ToArray();
+            return FdkHelper.Storage.Online.GetPairBars(symbol, period, startTime, endTime).ToArray();
         }
 
         public static double[] GetBarsAskHigh(string pairBars)
