@@ -67,9 +67,11 @@ namespace RHost
 				if (prevTime == quote.CreatingTime) 
                 {
 					indexOrder++;
-				} else 
+				} 
+				else
                 {
 					indexOrder = 0;
+					prevTime = quote.CreatingTime;
 				}
 				var timeSpan = quote.CreatingTime.Subtract(prevTime).TotalMilliseconds;
                 var maxLength = Math.Max(quote.Asks.Length, quote.Bids.Length);
