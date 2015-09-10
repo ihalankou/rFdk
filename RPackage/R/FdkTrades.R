@@ -2,6 +2,9 @@
 #' 
 #' @export
 ttTrade.Open <- function(){
+  list(ttTrade_Open(), ttTrade_Position())
+}
+ttTrade_Open <- function(){
   symInfo = GetTradeHistory()
   
   agentComission = GetTradeAgentCommission(symInfo)
@@ -31,7 +34,7 @@ ttTrade.Open <- function(){
   UnregisterVar(symInfo)
   
   data.table(agentComission, tradeClientOrderId, tradeComment, created,
-             expiration, symbol, initialVolume, isLimitOrder, isPendingOrder,
+  expiration, symbol, initialVolume, isLimitOrder, isPendingOrder,
              isPosition, isStopOrder, modified, orderId, price, profit, 
              side, stopLoss, swap, takeProfit, type, volume)
 }

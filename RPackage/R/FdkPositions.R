@@ -1,7 +1,6 @@
 #' Gets the account positions
 #' 
-#' @export
-ttTrade.Open <- function(){
+ttTrade_Position <- function(){
   symInfo = GetTradePositions()
   
   agentComission = GetPositionAgentCommission(symInfo)
@@ -23,53 +22,65 @@ ttTrade.Open <- function(){
 }
 #' Get trade history
 GetTradePositions <- function() {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetTradePositions')
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetTradePositions')
+}
+
+#' Get trade comission
+#' @param symInfo RHost variable that stores the array
+GetPositionAgentCommission <- function(symInfo) {
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionAgentCommission', symInfo)
+}
+
+#' Get trade comission
+#' @param symInfo RHost variable that stores the array
+GetPositionBuyAmount <- function(symInfo) {
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionBuyAmount', symInfo)
 }
 
 #' Get trade comission
 #' @param symInfo RHost variable that stores the array
 GetPositionBuyPrice <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetPositionBuyPrice', symInfo)
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionBuyPrice', symInfo)
 }
 
 #' Get trade comission
 #' @param symInfo RHost variable that stores the array
 GetPositionCommission <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetPositionCommission', symInfo)
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionCommission', symInfo)
 }
 
 #' Get trade comission
 #' @param symInfo RHost variable that stores the array
 GetPositionProfit <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetPositionProfit', symInfo)
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionProfit', symInfo)
 }
 
 #' Get trade comission
 #' @param symInfo RHost variable that stores the array
 GetPositionSellAmount <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetPositionSellAmount', symInfo)
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionSellAmount', symInfo)
 }
 
 #' Get trade comission
 #' @param symInfo RHost variable that stores the array
 GetPositionSellPrice <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetPositionSellPrice', symInfo)
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionSellPrice', symInfo)
 }
 
 #' Get trade comission
 #' @param symInfo RHost variable that stores the array
 GetPositionSettlementPrice <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetPositionSettlementPrice', symInfo)
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionSettlementPrice', symInfo)
 }
 
 #' Get trade comission
 #' @param symInfo RHost variable that stores the array
 GetPositionSwap <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetPositionSwap', symInfo)
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionSwap', symInfo)
 }
 
 #' Get trade comission
 #' @param symInfo RHost variable that stores the array
 GetPositionSymbol <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkPosition', 'GetPositionSymbol', symInfo)
+  rClr::clrCallStatic('FdkRHost.FdkPosition', 'GetPositionSymbol', symInfo)
 }
