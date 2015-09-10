@@ -11,6 +11,9 @@ namespace RHost
 	{
 		static readonly ILog Log = LogManager.GetLogger(typeof(FdkBars));
 		#region Bars
+		
+		//10 million
+		public const int HugeCount = 10000000;
 
 
         public static string ComputeBarsRangeTime(string symbol, string priceTypeStr, string barPeriodStr,
@@ -36,6 +39,10 @@ namespace RHost
 				if (FdkHelper.IsTimeZero(startTime))
 				{
 					var barCount = (int) barCountDbl;
+					if(barCount == 0)
+					{
+						barCount = HugeCount;
+					}
 					barsData = CalculateBarsForSymbolArray(symbol, priceType.Value, endTime, barPeriod, barCount);
 				}else
 				{
