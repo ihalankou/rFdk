@@ -11,7 +11,7 @@
 ttFeed.BarHistory <- function(symbol, 
      priceTypeStr="Bid", barPeriodStr = "M1", 
      startTime= as.POSIXct(0, origin = "1970-01-02"), endTime = Sys.time(),
-     barCount = 10000
+     barCount = 0
      ){
   symbolBars <- ComputeBarsRange(symbol, priceTypeStr, barPeriodStr, startTime, endTime, barCount)
   
