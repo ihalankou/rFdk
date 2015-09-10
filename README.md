@@ -41,7 +41,7 @@ Follow this link with expanded example and output:
 Configuration:
 http://rpubs.com/ciplogic/107672
 
-History:
+Feed History:
 http://rpubs.com/ciplogic/107673
 
 Trades:
