@@ -93,6 +93,18 @@ namespace TestRClrHost
         }
 
         [Test]
+        public void TestTradeRecordsForInvalidPrice()
+        {
+            //Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100106", "123qwe123", ""));
+            //Assert.AreEqual(0, FdkHelper.ConnectToFdk("", "", "", ""));
+            //Assert.AreEqual(0, FdkStatic.ConnectToFdk("tp.st.soft-fx.eu", "100065", "123qwe!", ""));
+            Assert.AreEqual(0, FdkStatic.ConnectToFdk("exchange.tts.st.soft-fx.eu", "100033", "123qwe!", ""));
+            var tradeRecords = FdkHelper.Trade.Server.GetTradeTransactionReports(TimeDirection.Forward, false
+                , null, null).ToArray();
+        }
+ 	
+
+        [Test]
         public void TestDataTradeIsolation()
         {
             const string address = "tpdemo.fxopen.com";
