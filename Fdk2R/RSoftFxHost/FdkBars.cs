@@ -4,6 +4,7 @@ using FdkMinimal;
 using SoftFX.Extended;
 using SoftFX.Extended.Storage;
 using log4net;
+using System.Diagnostics;
 
 namespace RHost
 {
@@ -22,6 +23,7 @@ namespace RHost
 
             Log.InfoFormat("FdkBar.ComputeBarPairs( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
                 symbol, barPeriodStr, startTime, endTime, barCountDbl);
+            Stopwatch stopWatch = Stopwatch.StartNew();
 			try
 			{
 				var barPeriod = FdkHelper.GetFieldByName<BarPeriod>(barPeriodStr);
@@ -49,7 +51,9 @@ namespace RHost
 					barsData = CalculateBarsForSymbolArrayRangeTime(symbol, priceType.Value, startTime, endTime, barPeriod);
 				}
 
-				var bars = FdkVars.RegisterVariable(barsData, "bars");
+                Log.InfoFormat("Elapsed time: {0} ms for {1} items", stopWatch.ElapsedMilliseconds, barsData.Length);
+
+                var bars = FdkVars.RegisterVariable(barsData, "bars");
 				return bars;
 			}
 			catch(Exception ex)
