@@ -2,12 +2,10 @@
 
 #' Gets the bars pairs as requested
 #' 
-#' @param symbol Symbol looked
-#' @param depth Depths of quotes info
-#' @export
-ttGetQuotesInfo <- function(symbol, depth) {
-  rClr::clrCallStatic('RHost.FdkBars', 'ComputeGetQuotesInfo', symbol, depth)
-}
+
+#ttGetQuotesInfo <- function(symbol, depth) {
+#  rClr::clrCallStatic('RHost.FdkBars', 'ComputeGetQuotesInfo', symbol, depth)
+#}
 
 #' Gets the bars pairs as requested
 #' 

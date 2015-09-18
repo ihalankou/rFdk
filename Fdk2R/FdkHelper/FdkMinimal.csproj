@@ -54,24 +54,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
-      <HintPath>..\..\..\..\lib\lib\log4net.dll</HintPath>
+      <HintPath>..\..\Lib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\MetaManagerScript\Lib\Newsoft.json\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SoftFX.Extended.Net, Version=1.0.0.1, Culture=neutral, PublicKeyToken=4233fb54369c191f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\SoftFX.Extended.Net.dll</HintPath>
+    <Reference Include="SoftFX.Extended.Net">
+      <HintPath>..\..\Lib\FDK\SoftFX.Extended.Net.dll</HintPath>
     </Reference>
-    <Reference Include="SoftFX.Lrp, Version=1.0.1.0, Culture=neutral, PublicKeyToken=4233fb54369c191f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\SoftFX.Lrp.dll</HintPath>
+    <Reference Include="SoftFX.Lrp">
+      <HintPath>..\..\Lib\FDK\SoftFX.Lrp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="YamlDotNet">
-      <HintPath>..\..\..\..\lib\YamlReader\YamlDotNet.dll</HintPath>
+      <HintPath>..\..\Lib\YamlReader\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
