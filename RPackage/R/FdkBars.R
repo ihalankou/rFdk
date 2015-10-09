@@ -2,7 +2,7 @@
 #' Gets the bars as requested
 #' 
 #' @param symbol Symbol looked
-#' @param priceTypeStr Bid or Ask
+#' @param priceTypeStr Bid or Ask or BidAsk
 #' @param barPeriodStr Values like: S1, S10, M1, M5, M15, M30, H1, H4, D1, W1, MN1 (default 'M1')
 #' @param startTime Start of the time intervals  
 #' @param endTime End of time interval. If startTime is not set, the bar count is taken from barCount variable
@@ -23,7 +23,32 @@ ttFeed.BarHistory <- function(symbol,
   from <- BarFroms(symbolBars)
   to <- BarTos(symbolBars)
   UnregisterVar(symbolBars)
-  data.table(high, low, open, close, volume, from, to)
+  
+  
+  resultData = data.table(high, low, open, close, volume, from, to)
+  
+  if(priceTypeStr == "BidAsk")
+  {
+    result = data.frame(split(resultData, sample(1:2)))
+    setnames(result, "X1.high", "bidHigh")
+    setnames(result, "X1.low", "bidLow")
+    setnames(result, "X1.open", "bidOpen")
+    setnames(result, "X1.close", "bidClose")
+    setnames(result, "X1.from", "bidFrom")
+    setnames(result, "X1.to", "bidTo")
+    
+    setnames(result, "X2.high", "askHigh")
+    setnames(result, "X2.low", "askLow")
+    setnames(result, "X2.open", "askOpen")
+    setnames(result, "X2.close", "askClose")
+    setnames(result, "X2.from", "askFrom")
+    setnames(result, "X2.to", "askTo")
+    
+  }
+  else
+    result = resultData
+  
+  result
 }
 
 

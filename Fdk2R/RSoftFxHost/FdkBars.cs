@@ -5,6 +5,7 @@ using SoftFX.Extended;
 using SoftFX.Extended.Storage;
 using log4net;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace RHost
 {
@@ -29,6 +30,11 @@ namespace RHost
 				var barPeriod = FdkHelper.GetFieldByName<BarPeriod>(barPeriodStr);
 				if (barPeriod == null)
 					return string.Empty;
+
+                if(priceTypeStr == "BidAsk")
+                {
+                    return CombinedBarsRangeTime(symbol, barPeriod, startTime, endTime, barCountDbl);
+                }
 
 				var priceType = FdkHelper.ParseEnumStr<PriceType>(priceTypeStr);
 				if (priceType == null)
@@ -63,8 +69,102 @@ namespace RHost
 			}
         }
 
-		#region Fdk direct wrapper
-		static Bar[] CalculateBarsForSymbolArray(
+        private static string CombinedBarsRangeTime(string symbol, BarPeriod barPeriod, DateTime startTime, DateTime endTime, double barCountDbl)
+        {
+            var isTimeZero =FdkHelper.IsTimeZero(startTime) ;
+
+
+            Bar[] barsDataBid;
+            Bar[] barsDataAsk;
+            if (FdkHelper.IsTimeZero(startTime))
+            {
+                var barCount = (int)barCountDbl;
+                if (barCount == 0)
+                {
+                    barCount = HugeCount;
+                }
+                barsDataAsk = CalculateBarsForSymbolArray(symbol, PriceType.Ask, endTime, barPeriod, barCount);
+                barsDataBid = CalculateBarsForSymbolArray(symbol, PriceType.Bid, endTime, barPeriod, barCount);
+            }
+            else
+            {
+                barsDataAsk = CalculateBarsForSymbolArrayRangeTime(symbol, PriceType.Ask, startTime, endTime, barPeriod);
+                barsDataBid = CalculateBarsForSymbolArrayRangeTime(symbol, PriceType.Bid, startTime, endTime, barPeriod);
+            }
+            var barsData = ProcessedBarsResult(barsDataBid, barsDataAsk);
+
+            var bars = FdkVars.RegisterVariable(barsData, "bars");
+            return bars;
+        }
+
+        private static object ProcessedBarsResult(Bar[] barsDataBid, Bar[] barsDataAsk)
+        {
+            
+            var maxCount = Math.Max(barsDataBid.Length, barsDataAsk.Length);
+            var resultBars = new List<Bar>(maxCount*2);
+            var positionAsk = 0;
+            var positionBid = 0;
+
+            while(positionAsk<barsDataAsk.Length && positionBid < barsDataBid.Length)
+            {
+                var barAsk = barsDataAsk[positionAsk];
+                var barBid = barsDataBid[positionBid];
+                if (barAsk.From == barBid.From)
+                {
+                    resultBars.Add(barBid);
+                    resultBars.Add(barAsk);
+                    positionAsk++;
+                    positionBid++;
+                }
+                else if (barAsk.From < barBid.From)
+                {
+                    //Add undefined bid bar with times of Ask bar
+                    AddBarUndefined(resultBars, barAsk.From, barAsk.To);
+                    resultBars.Add(barAsk);
+                    positionAsk++;
+                }
+                else if (barAsk.From > barBid.From)
+                {
+                    resultBars.Add(barBid);
+                    //Add undefined ask bar with times of Bid bar
+                    AddBarUndefined(resultBars, barBid.From, barBid.To);
+                    positionBid++;
+                }
+                else
+                    throw new InvalidOperationException("This case should never be hit!");
+            }
+            if(positionAsk < barsDataAsk.Length)
+            {
+                CopyRange(resultBars, barsDataAsk, positionAsk);
+            }
+            if (positionBid < barsDataBid.Length)
+            {
+                CopyRange(resultBars, barsDataBid, positionBid);
+            }
+
+            return resultBars.ToArray();
+        }
+
+        private static void AddBarUndefined(List<Bar> resultBars, DateTime from, DateTime to)
+        {
+            var undefinedBar = new Bar(from, to,
+                open: double.NaN, close: double.NaN,
+                low: double.NaN, high: double.NaN,
+                volume: double.NaN
+                );
+            resultBars.Add(undefinedBar);
+        }
+
+        static void CopyRange(List<Bar> resultBars, Bar[] barsData, int position)
+        {
+            for (var i = position; i < barsData.Length; i++)
+            {
+                resultBars.Add(barsData[i]);
+            }
+        }
+
+        #region Fdk direct wrapper
+        static Bar[] CalculateBarsForSymbolArray(
 			string symbol, PriceType priceType, DateTime startTime, BarPeriod barPeriod, int barCount)
 		{
 			return FdkHelper.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, -barCount).ToArray();
