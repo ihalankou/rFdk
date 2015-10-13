@@ -21,9 +21,6 @@ namespace RHost
         public static string ComputeBarsRangeTime(string symbol, string priceTypeStr, string barPeriodStr,
             DateTime startTime, DateTime endTime, double barCountDbl)
 		{
-
-            Log.InfoFormat("FdkBar.ComputeBarPairs( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
-                symbol, barPeriodStr, startTime, endTime, barCountDbl);
             Stopwatch stopWatch = Stopwatch.StartNew();
 			try
 			{
