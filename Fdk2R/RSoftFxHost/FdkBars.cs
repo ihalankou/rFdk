@@ -130,13 +130,13 @@ namespace RHost
                 else
                     throw new InvalidOperationException("This case should never be hit!");
             }
-            if(positionAsk < barsDataAsk.Length)
-            {
-                CopyRange(resultBars, barsDataAsk, positionAsk);
-            }
             if (positionBid < barsDataBid.Length)
             {
                 CopyRange(resultBars, barsDataBid, positionBid);
+            }
+            if (positionAsk < barsDataAsk.Length)
+            {
+                CopyRange(resultBars, barsDataAsk, positionAsk);
             }
 
             return resultBars.ToArray();

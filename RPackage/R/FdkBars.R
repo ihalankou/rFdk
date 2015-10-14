@@ -36,6 +36,7 @@ ttFeed.BarHistory <- function(symbol,
     setnames(result, "X1.close", "bidClose")
     setnames(result, "X1.from", "bidFrom")
     setnames(result, "X1.to", "bidTo")
+    setnames(result, "X1.volume", "bidVolume")
     
     setnames(result, "X2.high", "askHigh")
     setnames(result, "X2.low", "askLow")
@@ -43,6 +44,7 @@ ttFeed.BarHistory <- function(symbol,
     setnames(result, "X2.close", "askClose")
     setnames(result, "X2.from", "askFrom")
     setnames(result, "X2.to", "askTo")
+    setnames(result, "X2.volume", "askVolume")
     
   }
   else
