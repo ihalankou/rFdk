@@ -2,7 +2,7 @@
 #' 
 #' @export
 ttTrade.Open <- function(){
-  list(ttTrade_Open(), ttTrade_Position())
+  merge(ttTrade_Open(), ttTrade_Position(), by="symbol", all=TRUE)
 }
 ttTrade_Open <- function(){
   symInfo = GetTradeHistory()
