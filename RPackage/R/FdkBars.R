@@ -29,7 +29,7 @@ ttFeed.BarHistory <- function(symbol,
   
   if(priceTypeStr == "BidAsk")
   {
-    result = data.frame(split(resultData, sample(1:2)))
+    result = data.frame(split(resultData, sample(0:2)))
     setnames(result, "X1.high", "bidHigh")
     setnames(result, "X1.low", "bidLow")
     setnames(result, "X1.open", "bidOpen")
