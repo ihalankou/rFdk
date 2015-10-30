@@ -29,22 +29,27 @@ ttFeed.BarHistory <- function(symbol,
   
   if(priceTypeStr == "BidAsk")
   {
-    result = data.frame(split(resultData, sample(0:2)))
-    setnames(result, "X1.high", "bidHigh")
-    setnames(result, "X1.low", "bidLow")
-    setnames(result, "X1.open", "bidOpen")
-    setnames(result, "X1.close", "bidClose")
-    setnames(result, "X1.from", "bidFrom")
-    setnames(result, "X1.to", "bidTo")
-    setnames(result, "X1.volume", "bidVolume")
+    x1 <- data.table(resultData[c(T,F),])
+    setnames(x1, "high", "bidHigh")
+    setnames(x1, "low", "bidLow")
+    setnames(x1, "open", "bidOpen")
+    setnames(x1, "close", "bidClose")
+    setnames(x1, "from", "bidFrom")
+    setnames(x1, "to", "bidTo")
+    setnames(x1, "volume", "bidVolume")
     
-    setnames(result, "X2.high", "askHigh")
-    setnames(result, "X2.low", "askLow")
-    setnames(result, "X2.open", "askOpen")
-    setnames(result, "X2.close", "askClose")
-    setnames(result, "X2.from", "askFrom")
-    setnames(result, "X2.to", "askTo")
-    setnames(result, "X2.volume", "askVolume")
+    x2 <- data.table(resultData[c(F, T),])
+    setnames(x2, "high", "askHigh")
+    setnames(x2, "low", "askLow")
+    setnames(x2, "open", "askOpen")
+    setnames(x2, "close", "askClose")
+    setnames(x2, "from", "askFrom")
+    setnames(x2, "to", "askTo")
+    setnames(x2, "volume", "askVolume")
+    
+    result <- c(x1, x2)
+    
+    # result <- data.table(result)
     
   }
   else
