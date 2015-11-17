@@ -37,20 +37,20 @@ namespace RHost
         static readonly ILog Log = LogManager.GetLogger(typeof(FdkRealTime));
 
 		public static string SnapshotMonitoredSymbol(double id)
-        {
-            Log.InfoFormat("FdkRealTime.SnapshotMonitoredSymbol(id: {0})", id);
-            try
-			{
-				var quotes = BuildSnapshotFromMonitor(id);
-				var resultVarName = FdkVars.RegisterVariable(quotes, "rt_quotes_snapshot");
-				return resultVarName;
-			}
-			catch (Exception ex)
-			{
-				Log.Error(ex);
-				throw;
-			}
-		}
+    {
+      //Log.InfoFormat("FdkRealTime.SnapshotMonitoredSymbol(id: {0})", id);
+      try
+      {
+        var quotes = BuildSnapshotFromMonitor(id);
+        var resultVarName = FdkVars.RegisterVariable(quotes, "rt_quotes_snapshot");
+        return resultVarName;
+      }
+      catch (Exception ex)
+      {
+        Log.Error(ex);
+        throw;
+      }
+  }
 
         static void StartMonitoringOfSymbolIfNotEnabled(string symbol, int level)
         {

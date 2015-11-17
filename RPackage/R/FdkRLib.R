@@ -33,7 +33,7 @@ UnregisterVar <- function(varName) {
 #' Clear the environment variables
 #' 
 #' @param varName .Net variable to be removed
-ttUnregisterAllVariables <- function(varName) {
-  rClr::clrCallStatic('RHost.FdkVars', 'ClearAll', varName)
+ttUnregisterAllVariables <- function() {
+  rClr::clrCallStatic('RHost.FdkVars', 'ClearAll')
 }
 
