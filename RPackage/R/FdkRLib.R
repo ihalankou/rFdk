@@ -4,7 +4,6 @@
 #' 
 #' @param symbol Symbol looked
 #' @param depth Depths of quotes info
-#' @export
 ttGetQuotesInfo <- function(symbol, depth) {
   rClr::clrCallStatic('RHost.FdkBars', 'ComputeGetQuotesInfo', symbol, depth)
 }
@@ -14,7 +13,6 @@ ttGetQuotesInfo <- function(symbol, depth) {
 #' @param symbol Symbol looked
 #' @param priceTypeStr Ask or bid
 #' @param barPeriodStr Values like: M1, H1
-#' @export
 ttGetBarsInfo <- function(symbol, priceTypeStr, barPeriodStr) {
   rClr::clrCallStatic('RHost.FdkBars', 'ComputeGetBarsInfo', symbol, priceTypeStr, barPeriodStr)
 }

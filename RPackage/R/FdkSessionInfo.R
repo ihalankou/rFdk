@@ -1,7 +1,7 @@
 #' Gets the session fields
 #' 
 #' @export
-ttSessionInfo <- function(){
+ttConf.SessionInfo <- function(){
   varName = GetSessionInfo()
   
   platformCompany = PlatformCompany(varName)
