@@ -100,7 +100,8 @@ namespace RHost
             var resultBars = new List<Bar>(maxCount*2);
             var positionAsk = 0;
             var positionBid = 0;
-            Bar previousAsk = new Bar(DateTime.Now, DateTime.Now, 0,0,0,0,0);
+            Bar previousAsk = new Bar(DateTime.Now, DateTime.Now, 
+                double.NaN, double.NaN, double.NaN, double.NaN, double.NaN);
             Bar previousBid = previousAsk;
             while (positionAsk<barsDataAsk.Length && positionBid < barsDataBid.Length)
             {

@@ -9,4 +9,7 @@ Description: It exposes TickTrader's FDK API to R
 Depends:
     R (>= 3.0)
 License: MIT
-Imports: rClr, data.table
+Imports:
+    rClr,
+    data.table
+RoxygenNote: 5.0.1

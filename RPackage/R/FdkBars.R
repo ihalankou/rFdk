@@ -49,7 +49,7 @@ ttFeed.BarHistory <- function(symbol,
     
     result <- c(x1, x2)
     
-    # result <- data.table(result)
+    result <- as.data.table(result)
     
   }
   else
