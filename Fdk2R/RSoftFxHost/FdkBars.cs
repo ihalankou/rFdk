@@ -96,15 +96,15 @@ namespace RHost
 
         private static object ProcessedBarsResult(Bar[] barsDataBid, Bar[] barsDataAsk)
         {
-            
             var maxCount = Math.Max(barsDataBid.Length, barsDataAsk.Length);
             var resultBars = new List<Bar>(maxCount*2);
             var positionAsk = 0;
             var positionBid = 0;
-
-            while(positionAsk<barsDataAsk.Length && positionBid < barsDataBid.Length)
+            Bar previousAsk = new Bar(DateTime.Now, DateTime.Now, 0,0,0,0,0);
+            Bar previousBid = previousAsk;
+            while (positionAsk<barsDataAsk.Length && positionBid < barsDataBid.Length)
             {
-                var barAsk = barsDataAsk[positionAsk];
+                Bar barAsk = barsDataAsk[positionAsk];
                 var barBid = barsDataBid[positionBid];
                 if (barAsk.From == barBid.From)
                 {
@@ -116,7 +116,7 @@ namespace RHost
                 else if (barAsk.From < barBid.From)
                 {
                     //Add undefined bid bar with times of Ask bar
-                    AddBarUndefined(resultBars, barAsk.From, barAsk.To);
+                    AddBarUndefined(resultBars, barAsk.From, barAsk.To, previousAsk);
                     resultBars.Add(barAsk);
                     positionAsk++;
                 }
@@ -124,11 +124,13 @@ namespace RHost
                 {
                     resultBars.Add(barBid);
                     //Add undefined ask bar with times of Bid bar
-                    AddBarUndefined(resultBars, barBid.From, barBid.To);
+                    AddBarUndefined(resultBars, barBid.From, barBid.To, previousBid);
                     positionBid++;
                 }
                 else
                     throw new InvalidOperationException("This case should never be hit!");
+                previousAsk = barAsk;
+                previousBid = barBid;
             }
             if (positionBid < barsDataBid.Length)
             {
@@ -142,12 +144,12 @@ namespace RHost
             return resultBars.ToArray();
         }
 
-        private static void AddBarUndefined(List<Bar> resultBars, DateTime from, DateTime to)
+        private static void AddBarUndefined(List<Bar> resultBars, DateTime from, DateTime to, Bar previous)
         {
             var undefinedBar = new Bar(from, to,
-                open: double.NaN, close: double.NaN,
-                low: double.NaN, high: double.NaN,
-                volume: double.NaN
+                open: previous.Open, close: previous.Close,
+                low: previous.Low, high: previous.High,
+                volume: previous.Volume
                 );
             resultBars.Add(undefinedBar);
         }
