@@ -37,8 +37,8 @@ namespace RHost
 				if (priceType == null)
 					return string.Empty;
 
-				Log.InfoFormat("FdkBars.ComputeBarsRangeTime( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4})",
-					symbol, barPeriodStr, startTime, endTime, barCountDbl);
+				Log.InfoFormat("FdkBars.ComputeBarsRangeTime( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4} priceType: {5})",
+					symbol, barPeriodStr, startTime, endTime, barCountDbl, priceType);
 				
 				Bar[] barsData;
 				if (FdkHelper.IsTimeZero(startTime))
