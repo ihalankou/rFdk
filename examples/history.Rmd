@@ -52,5 +52,5 @@ now <-as.POSIXct(Sys.time())
 # 1000 seconds from present
 prevNow <-as.POSIXct(now-1000)
 
-ttFeed.TickLevel2History('EURUSD', prevNow, now, depth=1)
+ttFeed.TickLevel2History('EURUSD', prevNow, now, depth=2)
 ```
