@@ -99,7 +99,7 @@
 		<property name="MSBuild.Platform" value="Any CPU" />
 		<property name="MSBuild.Target" value="Rebuild"/>
 
-		<property name="Fdk2RVersion" value="1.0.20150817" />
+		<property name="Fdk2RVersion" value="1.0.20151204" />
 		
 		<property name="MSBuild.SolutionFile" value="${SrcDir}\Fdk2R\RFdk.sln"/>
 		<property name="MSBuild.Output" value=".\OrdersCleaner.build-${MSBuild.Configuration}-${MSBuild.Platform}.log"/>
