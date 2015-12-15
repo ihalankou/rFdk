@@ -20,6 +20,12 @@ namespace R2Cs
 
         static void Main()
         {
+            /*
+            FdkHelper.Address = "tpdemo.fxopen.com";
+            FdkHelper.Login = "59932";
+            FdkHelper.Password = "8mEx7zZ2";
+            */
+            FdkHelper.Reconnect("");
 
             REngine.SetEnvironmentVariables();
             // There are several options to initialize the engine, but by default the following suffice:
