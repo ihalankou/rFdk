@@ -48,8 +48,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -77,9 +77,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FdkMinimal">
-      <HintPath>..\..\Lib\FdkMinimal\FdkMinimal.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\Lib\FdkMinimal\log4net.dll</HintPath>
     </Reference>
@@ -92,11 +89,12 @@
     <Reference Include="RDotNet.NativeLibrary">
       <HintPath>..\..\Lib\R2Clr\RDotNet.NativeLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="SoftFX.Extended.Net">
-      <HintPath>..\..\Lib\FdkMinimal\SoftFX.Extended.Net.dll</HintPath>
+    <Reference Include="SoftFX.Extended.Net, Version=1.17.0.0, Culture=neutral, PublicKeyToken=4233fb54369c191f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\FdkLibs\SoftFX.Extended.Net.dll</HintPath>
     </Reference>
     <Reference Include="SoftFX.Lrp">
-      <HintPath>..\..\Lib\FdkMinimal\SoftFX.Lrp.dll</HintPath>
+      <HintPath>..\..\Lib\FdkLibs\SoftFX.Lrp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -117,9 +115,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RSoftFxHost\FdkRHost.csproj">
-      <Project>{6b485272-ef8e-47f3-aee5-f3418b39de80}</Project>
-      <Name>FdkRHost</Name>
+    <ProjectReference Include="..\FdkHelper\FdkMinimal.csproj">
+      <Project>{c8e8bced-4a13-4521-853a-8160393d67a3}</Project>
+      <Name>FdkMinimal</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

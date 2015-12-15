@@ -79,11 +79,11 @@
     </Reference>
     <Reference Include="SoftFX.Extended.Net, Version=1.17.0.0, Culture=neutral, PublicKeyToken=4233fb54369c191f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\FdkMinimal\SoftFX.Extended.Net.dll</HintPath>
+      <HintPath>..\..\Lib\FdkLibs\SoftFX.Extended.Net.dll</HintPath>
     </Reference>
     <Reference Include="SoftFX.Lrp, Version=1.17.0.0, Culture=neutral, PublicKeyToken=4233fb54369c191f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\FdkMinimal\SoftFX.Lrp.dll</HintPath>
+      <HintPath>..\..\Lib\FdkLibs\SoftFX.Lrp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />

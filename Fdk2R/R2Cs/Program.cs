@@ -3,28 +3,27 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using FdkMinimal;
 using RDotNet;
 using SoftFX.Extended;
+using FdkMinimal;
 
 namespace R2Cs
 {
     class Program
     {
+
+        static void ProgramStart()
+        {
+            DataFeed Feed = new DataFeed();
+            //Feed.Tick += (sender, args) => { };
+        }
+
         static void Main()
         {
-            
-            
-            FdkHelper.Address = "tpdemo.fxopen.com";
-            FdkHelper.Login = "59932";
-            FdkHelper.Password = "8mEx7zZ2";
-        
 
             REngine.SetEnvironmentVariables();
             // There are several options to initialize the engine, but by default the following suffice:
             var engine = REngine.GetInstance();
-			
-            FdkHelper.Reconnect("");
             var bars = FdkHelper.Storage.Online.GetBars("EURUSD", PriceType.Ask, BarPeriod.M1, DateTime.Now, -1000000).ToArray();
             WriteCsv(bars, "process.csv");
 
