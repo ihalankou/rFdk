@@ -82,7 +82,7 @@ namespace FdkMinimal.Facilities
             PriceEntries priceEntries = _calculator.Prices;
 
             DataFeed feed = FdkHelper.Feed;
-            DataFeedServer server = feed.Server;
+            var server = feed.Server;
             server.SubscribeToQuotes(_symbolInfoDic.Select(sym => sym.Name), 1);
             AutoResetEvent autoResetEvent = new AutoResetEvent(true);
             feed.Tick += (arg, ev) => autoResetEvent.Set();
