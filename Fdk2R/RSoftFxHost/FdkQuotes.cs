@@ -60,13 +60,13 @@ namespace RHost
 
         internal static double[] QuoteArrayBid(Quote[] quotes)
         {
-            return quotes.SelectToArray(b => b.HasBid ? b.Bid : -1);
+            return quotes.SelectToArray(b => b.HasBid ? b.Bid : double.NaN);
         }
 
 
         internal static double[] QuoteArrayAsk(Quote[] quotes)
         {
-            return quotes.SelectToArray(b => b.HasAsk ? b.Ask : -1);
+            return quotes.SelectToArray(b => b.HasAsk ? b.Ask : double.NaN);
         }
 
         internal static DateTime[] QuoteArrayCreateTime(Quote[] quotes)
