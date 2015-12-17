@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using YamlDotNet.RepresentationModel;
 
 namespace FdkMinimal.Facilities
 {
@@ -12,12 +11,6 @@ namespace FdkMinimal.Facilities
         {
             foreach (var it in items)
                 action (it);
-        }
-
-        public static string GetYamlValue(this YamlNode yamlNode)
-        {
-            var scalarNode = (YamlScalarNode)yamlNode;
-            return scalarNode.Value;
         }
 
         public static void RemoveAll<K,V>(this Dictionary<K,V> dictionary, Func<KeyValuePair<K,V>, bool> predicate)

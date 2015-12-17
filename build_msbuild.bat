@@ -1,7 +1,7 @@
 @echo off
 
 set MsBuildFilePath="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe"
-set R_Exe="D:\apps\R\R-3.2.2\bin\R.exe"
+set R_Exe="C:\Program Files\R\R-3.2.1\bin\R.exe"
 
 
 cd Fdk2R
@@ -9,3 +9,4 @@ cd Fdk2R
 cd ..
 %R_Exe% CMD BATCH build_r.r
 move /Y rFdk_1.0.20151204.zip dist 
+pause
