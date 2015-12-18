@@ -37,3 +37,4 @@ examples/rsconnect/documents
 Fdk2R/packages/FDK.*
 Fdk2R/packages/YamlDotNet.*
 RPackage/Data/*
+RPackage/Store/*

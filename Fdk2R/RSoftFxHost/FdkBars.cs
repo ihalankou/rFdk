@@ -6,6 +6,8 @@ using SoftFX.Extended.Storage;
 using log4net;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Text;
+using System.IO;
 
 namespace RHost
 {
@@ -40,9 +42,21 @@ namespace RHost
                 barsDataBid = CalculateBarsForSymbolArrayRangeTime(symbol, PriceType.Bid, startTime, endTime, barPeriod);
             }
             var barsData = FdkBarsMerger.ProcessedBarsResult(barsDataBid, barsDataAsk);
+            LogBars(barsData);
 
             var bars = FdkVars.RegisterVariable(barsData, "bars");
             return bars;
+        }
+
+        private static void LogBars(BarData[] barsData)
+        {
+            Debugger.Launch();
+            var sb = new StringBuilder();
+            foreach (var data in barsData)
+            {
+                sb.AppendLine(data.ToString());
+            }
+            File.WriteAllText(@"d:\merged_bars.txt", sb.ToString());
         }
 
         public static string ComputeBarsRangeTime(string symbol, string priceTypeStr, string barPeriodStr,
