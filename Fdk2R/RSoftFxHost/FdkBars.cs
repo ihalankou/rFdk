@@ -50,6 +50,7 @@ namespace RHost
 
         private static void LogBars(BarData[] barsData)
         {
+            return;
             Debugger.Launch();
             var sb = new StringBuilder();
             foreach (var data in barsData)
