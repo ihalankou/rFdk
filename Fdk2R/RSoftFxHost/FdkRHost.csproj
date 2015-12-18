@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="FdkBarPairs.cs" />
     <Compile Include="FdkBars.cs" />
+    <Compile Include="FdkBarsMerger.cs" />
     <Compile Include="FdkCurrencyInfo.cs" />
     <Compile Include="FdkLevel2.cs" />
     <Compile Include="FdkPositions.cs" />
