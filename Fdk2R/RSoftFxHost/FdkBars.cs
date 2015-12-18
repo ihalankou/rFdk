@@ -22,8 +22,8 @@ namespace RHost
             var isTimeZero = FdkHelper.IsTimeZero(startTime);
 
 
-            Bar[] barsDataBid;
-            Bar[] barsDataAsk;
+            BarData[] barsDataBid;
+            BarData[] barsDataAsk;
             if (FdkHelper.IsTimeZero(startTime))
             {
                 var barCount = (int)barCountDbl;
@@ -67,7 +67,7 @@ namespace RHost
 				Log.InfoFormat("FdkBars.ComputeBarsRangeTime( symbol: {0}, barPeriod: {1}, startTime: {2}, endTime: {3}, barCount: {4} priceType: {5})",
 					symbol, barPeriodStr, startTime, endTime, barCountDbl, priceType);
 				
-				Bar[] barsData;
+				BarData[] barsData;
 				if (FdkHelper.IsTimeZero(startTime))
 				{
 					var barCount = (int) barCountDbl;
@@ -93,18 +93,24 @@ namespace RHost
 			}
         }
 
-        
+        public static BarData ToBarData(this Bar bar)
+        {
+            return new BarData(bar.From, bar.To, bar.Open, bar.Close, bar.Low, bar.High, bar.Volume);
+        }
         #region Fdk direct wrapper
-        static Bar[] CalculateBarsForSymbolArray(
+        static BarData[] CalculateBarsForSymbolArray(
 			string symbol, PriceType priceType, DateTime startTime, BarPeriod barPeriod, int barCount)
 		{
-			return FdkHelper.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, -barCount).ToArray();
+			return FdkHelper.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, -barCount)
+                .ToArray()
+                .SelectToArray(bar => bar.ToBarData());
 		}
 
-		static Bar[] CalculateBarsForSymbolArrayRangeTime(
+		static BarData[] CalculateBarsForSymbolArrayRangeTime(
 			string symbol, PriceType priceType, DateTime startTime, DateTime endTime, BarPeriod barPeriod)
 		{
-			return FdkHelper.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, endTime).ToArray();
+			return FdkHelper.Storage.Online.GetBars(symbol, priceType, barPeriod, startTime, endTime).ToArray()
+                .SelectToArray(bar => bar.ToBarData()); 
 		}
 
 		static HistoryInfo GetQuotesInfo(string symbol, int depth)
@@ -161,10 +167,10 @@ namespace RHost
 
         #endregion
 
-        #region Bar fields
+        #region BarData fields
         public static double[] BarHighs(string bars)
         {
-            var barData = FdkVars.GetValue<Bar[]>(bars);
+            var barData = FdkVars.GetValue<BarData[]>(bars);
 
             return GetBarsHigh(barData);
         }
@@ -172,81 +178,81 @@ namespace RHost
 
         public static double[] BarLows(string bars)
         {
-            var barData = FdkVars.GetValue<Bar[]>(bars);
+            var barData = FdkVars.GetValue<BarData[]>(bars);
 
             return GetBarsLow(barData);
         }
 
         public static double[] BarVolumes(string bars)
         {
-            var barData = FdkVars.GetValue<Bar[]>(bars);
+            var barData = FdkVars.GetValue<BarData[]>(bars);
 
             return GetBarsVolume(barData);
         }
 
         public static double[] BarOpens(string bars)
         {
-            var barData = FdkVars.GetValue<Bar[]>(bars);
+            var barData = FdkVars.GetValue<BarData[]>(bars);
 
             return GetBarsOpen(barData);
         }
 
         public static double[] BarCloses(string bars)
         {
-            var barData = FdkVars.GetValue<Bar[]>(bars);
+            var barData = FdkVars.GetValue<BarData[]>(bars);
 
             return GetBarsClose(barData);
         }
 
         public static DateTime[] BarFroms(string bars)
         {
-            var barData = FdkVars.GetValue<Bar[]>(bars);
+            var barData = FdkVars.GetValue<BarData[]>(bars);
 
             return GetBarsFrom(barData);
         }
 
         public static DateTime[] BarTos(string bars)
         {
-            var barData = FdkVars.GetValue<Bar[]>(bars);
+            var barData = FdkVars.GetValue<BarData[]>(bars);
 
             return GetBarsTo(barData);
         }
 
 
-        public static double[] GetBarsHigh(Bar[] barData)
+        public static double[] GetBarsHigh(BarData[] barData)
         {
-            return barData.SelectToArray(b => b == null ? 0.0 : b.High);
+            return barData.SelectToArray(b => b.High);
         }
 
-        public static double[] GetBarsLow(Bar[] barData)
+        public static double[] GetBarsLow(BarData[] barData)
         {
-            return barData.SelectToArray(b => b == null ? 0.0 : b.Low);
+            return barData.SelectToArray(b => b.Low);
         }
 
-        public static double[] GetBarsVolume(Bar[] barData)
+        public static double[] GetBarsVolume(BarData[] barData)
         {
-            return barData.SelectToArray(b => b == null ? 0.0 : b.Volume);
+            return barData.SelectToArray(b => b.Volume);
         }
 
-        public static double[] GetBarsOpen(Bar[] barData)
+        public static double[] GetBarsOpen(BarData[] barData)
         {
-            return barData.SelectToArray(b => b == null ? 0.0 : b.Open);
+            return barData.SelectToArray(b => b.Open);
         }
 
-        public static double[] GetBarsClose(Bar[] barData)
+        public static double[] GetBarsClose(BarData[] barData)
         {
-            return barData.SelectToArray(b => b == null ? 0.0 : b.Close);
+            return barData.SelectToArray(b => b.Close);
         }
 
 
-        internal static DateTime[] GetBarsFrom(Bar[] barData)
+        internal static DateTime[] GetBarsFrom(BarData[] barData)
         {
             return barData.SelectToArray(b => b.From.AddUtc());
         }
 
-        internal static DateTime[] GetBarsTo(Bar[] barData)
+        internal static DateTime[] GetBarsTo(BarData[] barData)
         {
-            return barData.SelectToArray(b =>  b.To.AddUtc());
+            return barData.SelectToArray(b => b.To.AddUtc());
         }
         #endregion
     }

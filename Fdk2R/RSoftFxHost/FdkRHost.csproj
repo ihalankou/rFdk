@@ -91,6 +91,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarData.cs" />
     <Compile Include="FdkBarPairs.cs" />
     <Compile Include="FdkBars.cs" />
     <Compile Include="FdkBarsMerger.cs" />

@@ -12,7 +12,12 @@ namespace TestRClrHost
 	{
 		public static void Main()
 		{
-			FdkHelper.ConnectToFdk("localhost", "100001", "123qwe!", "");
+			FdkHelper.ConnectToFdk("78.46.196.240", "100008", "123qwe!", "");
+            var now = DateTime.UtcNow;
+            var prevNow = DateTime.UtcNow.Subtract(new TimeSpan(30,0,0));
+            FdkBars.ComputeBarsRangeTime("BTCUSD_L", "BidAsk", "M1", prevNow, now, 0);
+            return;
+
             var bars = FdkTradeReports.GetTradeTransactionReportAll();
             var comission = FdkTradeReports.GetTradeComment(bars);
             FdkVars.Unregister(bars);
