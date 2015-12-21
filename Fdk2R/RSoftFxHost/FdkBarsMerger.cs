@@ -26,7 +26,7 @@ namespace RHost
             while (positionAsk < barsDataAsk.Length && positionBid < barsDataBid.Length)
             {
                 BarData barAsk = barsDataAsk[positionAsk];
-                var barBid = barsDataBid[positionBid];
+                BarData barBid = barsDataBid[positionBid];
                 if (barAsk.From == barBid.From)
                 {
                     AddBarPairs(resultBars, barBid, barAsk);
@@ -36,19 +36,19 @@ namespace RHost
                 else if (barAsk.From > barBid.From)
                 {
                     //Add undefined bid bar with times of Ask bar
-                    var askUndefined = CalculateBarUndefined(barAsk.From, barAsk.To, previousAsk);
+                    BarData askUndefined = CalculateBarUndefined(barBid.From, barBid.To, previousAsk);
 
                     AddBarPairs(resultBars, barBid, askUndefined);
                     
-                    positionAsk++;
+                    positionBid++;
                 }
                 else if (barAsk.From < barBid.From)
                 {
                     //Add undefined ask bar with times of Bid bar
-                    var bidUndefined = CalculateBarUndefined(barBid.From, barBid.To, previousBid);
+                    BarData bidUndefined = CalculateBarUndefined(barAsk.From, barAsk.To, previousBid);
                     AddBarPairs(resultBars, bidUndefined, barAsk);
                     
-                    positionBid++;
+                    positionAsk++;
                 }
                 else
                     throw new InvalidOperationException("This case should never be hit!");
