@@ -27,7 +27,6 @@ ttConnect()
 
 #2. Request a monitoring ID
 
-Trades in account:
 ```{r}
 sym = ttFeed.Subscribe("EURUSD", 2)
 ```
@@ -35,7 +34,6 @@ sym = ttFeed.Subscribe("EURUSD", 2)
 #3. Monitoring using the ID
 
 ```{r}
-# Commented as it takes to long
 ttFeed.GetLevel2(sym)
 Sys.sleep(3)
 
