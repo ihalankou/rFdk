@@ -42,7 +42,7 @@ namespace RHost
                 barsDataBid = CalculateBarsForSymbolArrayRangeTime(symbol, PriceType.Bid, startTime, endTime, barPeriod);
             }
             var barsData = FdkBarsMerger.ProcessedBarsResult(barsDataBid, barsDataAsk);
-            LogBars(barsData);
+            //LogBars(barsData);
 
             var bars = FdkVars.RegisterVariable(barsData, "bars");
             return bars;
@@ -50,7 +50,6 @@ namespace RHost
 
         private static void LogBars(BarData[] barsData)
         {
-            return;
             Debugger.Launch();
             var sb = new StringBuilder();
             foreach (var data in barsData)

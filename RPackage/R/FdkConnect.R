@@ -1,6 +1,6 @@
 #' Initialize the CLR runtime and loads the FDK host assembly
 #' 
-ttInit <- function() {t
+ttInit <- function() {
   require(rClr)
   if(!require(stringi))
   {

@@ -6,7 +6,6 @@ using log4net;
 
 namespace RHost
 {
-    
     static class FdkBarsMerger
     {
 
@@ -16,76 +15,53 @@ namespace RHost
         {
             var maxCount = Math.Max(barsDataBid.Length, barsDataAsk.Length);
             var resultBars = new List<BarData>(maxCount * 2);
-            var positionAsk = 0;
-            var positionBid = 0;
-            var nowTime = DateTime.UtcNow;
-            BarData previousAsk = new BarData(nowTime, nowTime,
-                double.NaN, double.NaN, double.NaN, double.NaN, double.NaN);
-            BarData previousBid = new BarData(nowTime, nowTime,
-                double.NaN, double.NaN, double.NaN, double.NaN, double.NaN);
-            while (positionAsk < barsDataAsk.Length && positionBid < barsDataBid.Length)
+           
+            BarCursor bidCursor = new BarCursor(barsDataBid);
+            BarCursor askCursor = new BarCursor(barsDataAsk);
+
+            while (bidCursor.CanContinue && askCursor.CanContinue)
             {
-                BarData barAsk = barsDataAsk[positionAsk];
-                var barBid = barsDataBid[positionBid];
+                BarData barAsk = askCursor.Current;
+                BarData barBid = bidCursor.Current;
                 if (barAsk.From == barBid.From)
                 {
                     AddBarPairs(resultBars, barBid, barAsk);
-                    positionAsk++;
-                    positionBid++;
+                    askCursor.Next();
+                    bidCursor.Next();
                 }
                 else if (barAsk.From > barBid.From)
                 {
                     //Add undefined bid bar with times of Ask bar
-                    var askUndefined = CalculateBarUndefined(barAsk.From, barAsk.To, previousAsk);
-
+                    BarData askUndefined = CalculateBarUndefined(barBid.From, barBid.To, askCursor.Previous);
                     AddBarPairs(resultBars, barBid, askUndefined);
-                    
-                    positionAsk++;
+                    bidCursor.Next();
                 }
                 else if (barAsk.From < barBid.From)
                 {
                     //Add undefined ask bar with times of Bid bar
-                    var bidUndefined = CalculateBarUndefined(barBid.From, barBid.To, previousBid);
+                    BarData bidUndefined = CalculateBarUndefined(barAsk.From, barAsk.To, bidCursor.Previous);
                     AddBarPairs(resultBars, bidUndefined, barAsk);
-                    
-                    positionBid++;
+                    askCursor.Next();
                 }
                 else
                     throw new InvalidOperationException("This case should never be hit!");
-                previousAsk = barAsk;
-                previousBid = barBid;
             }
-            if (positionBid < barsDataBid.Length)
+            if (bidCursor.CanContinue)
             {
-                CopyRange(resultBars, barsDataBid, positionBid, previousAsk, isUndefinedBid: false);
+                bidCursor.CopyRange(resultBars, askCursor.Previous, isUndefinedBid: false);
             }
-            if (positionAsk < barsDataAsk.Length)
+            if (askCursor.CanContinue)
             {
-                CopyRange(resultBars, barsDataAsk, positionAsk, previousBid, isUndefinedBid: true);
+                askCursor.CopyRange(resultBars, bidCursor.Previous, isUndefinedBid: true);
             }
 
             return resultBars.ToArray();
         }
 
-        private static void AddBarPairs(List<BarData> resultBars, BarData barBid, BarData barAsk)
+        internal static void AddBarPairs(List<BarData> resultBars, BarData barBid, BarData barAsk)
         {
             resultBars.Add(barBid);
             resultBars.Add(barAsk);
-        }
-
-        static void CopyRange(List<BarData> resultBars, BarData[] barsData, int position, BarData undefinedBar, bool isUndefinedBid)
-        {
-            for (var i = position; i < barsData.Length; i++)
-            {
-                if (isUndefinedBid)
-                {
-                    AddBarPairs(resultBars, undefinedBar, barsData[i]);
-                }
-                else
-                {
-                    AddBarPairs(resultBars, barsData[i], undefinedBar);
-                }
-            }
         }
 
         private static BarData CalculateBarUndefined(DateTime from, DateTime to, BarData previous)
