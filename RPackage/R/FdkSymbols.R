@@ -1,7 +1,7 @@
 #' Gets the symbol info
 #' 
 #' @export
-ttGetSymbolData <- function(){
+ttConf.Symbol <- function(){
   symInfo = GetSymbolInfos()
   comission = GetSymbolComission(symInfo)
   # contractMultiplier = GetSymbolContractMultiplier(symInfo)
@@ -14,8 +14,6 @@ ttGetSymbolData <- function(){
   profitCurrency = GetSymbolSettlementCurrency(symInfo)
   swapLong = GetSymbolSwapSizeLong(symInfo)
   swapShort = GetSymbolSwapSizeShort(symInfo)
-  pipsValue = GetSymbolPipsValue(symInfo)
-  priceBid = GetSymbolCurrentPriceBid(symInfo)
   
   UnregisterVar(symInfo)
   
@@ -24,9 +22,8 @@ ttGetSymbolData <- function(){
     comission, marginCurrency, profitCurrency,
     limitsComission,
     minTradeVolume, maxTradeVolume, 
-    swapLong, swapShort,
-	pipsValue, priceBid
-    )
+    swapLong, swapShort
+             )
 }
 #' Get symbol field
 GetSymbolInfos <- function() {
@@ -87,15 +84,3 @@ GetSymbolSwapSizeLong <- function(symInfo) {
 GetSymbolSwapSizeShort <- function(symInfo) {
   rClr::clrCallStatic('RHost.FdkSymbolInfo', 'GetSymbolSwapSizeShort', symInfo)
 }
-
-#' Get symbol field
-#' @param symInfo RHost variable that stores the array
-GetSymbolPipsValue <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkSymbolInfo', 'GetSymbolPipsValue', symInfo)
-}
-#' Get symbol field
-#' @param symInfo RHost variable that stores the array
-GetSymbolCurrentPriceBid <- function(symInfo) {
-  rClr::clrCallStatic('RHost.FdkSymbolInfo', 'GetSymbolCurrentPriceBid', symInfo)
-}
-

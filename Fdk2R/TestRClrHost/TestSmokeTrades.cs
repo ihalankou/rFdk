@@ -8,6 +8,7 @@ using NUnit.Framework;
 using RHost;
 using SoftFX.Extended;
 using SoftFX.Extended.Events;
+using FdkMinimal;
 
 namespace TestRClrHost
 {
@@ -16,7 +17,7 @@ namespace TestRClrHost
 	{		
 		static DataTrade Trade
 		{
-			get { return FdkHelper.Wrapper.ConnectLogic.TradeWrapper.Trade; }
+			get { return FdkHelper.Trade; }
 		}
         [Test]
         public void TestGetTradeRecords()
@@ -35,14 +36,16 @@ namespace TestRClrHost
 		{
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100106", "123qwe123", ""));
             //Assert.AreEqual(0, FdkHelper.ConnectToFdk("", "", "", ""));
-            Assert.AreEqual(0, FdkStatic.ConnectToFdk("tp.st.soft-fx.eu", "100065", "123qwe!", ""));
+            //Assert.AreEqual(0, FdkStatic.ConnectToFdk("tp.st.soft-fx.eu", "100065", "123qwe!", ""));
+            Assert.AreEqual(0, FdkStatic.ConnectToFdk("", "", "", ""));
             var calculator = FdkStatic.Calculator;
             var symbols = FdkSymbolInfo.Symbols;
-            var symFirst = symbols.First();
+            var symFirst = symbols.First(sym=>sym.Name=="EURUSD");
 
-            FdkSymbolInfo.RegisterToFeed(FdkSymbolInfo.Feed, calculator);
-            Thread.Sleep(1000);
+            //FdkSymbolInfo.RegisterToFeed(FdkSymbolInfo.Feed, calculator);
+            //Thread.Sleep(1000);
             double volumeByHand = FdkSymbolInfo.CalculatePipsValue(symFirst);
+            double priceBid = FdkSymbolInfo.CalculatePriceBid(symFirst);
 		}
  	
         [Test]
@@ -88,6 +91,18 @@ namespace TestRClrHost
             var comission = FdkTradeReports.GetTradeComment(bars);
             FdkVars.Unregister(bars);
         }
+
+        [Test]
+        public void TestTradeRecordsForInvalidPrice()
+        {
+            //Assert.AreEqual(0, FdkHelper.ConnectToFdk("tp.dev.soft-fx.eu", "100106", "123qwe123", ""));
+            //Assert.AreEqual(0, FdkHelper.ConnectToFdk("", "", "", ""));
+            //Assert.AreEqual(0, FdkStatic.ConnectToFdk("tp.st.soft-fx.eu", "100065", "123qwe!", ""));
+            Assert.AreEqual(0, FdkStatic.ConnectToFdk("exchange.tts.st.soft-fx.eu", "100033", "123qwe!", ""));
+            var tradeRecords = FdkHelper.Trade.Server.GetTradeTransactionReports(TimeDirection.Forward, false
+                , null, null).ToArray();
+        }
+ 	
 
         [Test]
         public void TestDataTradeIsolation()

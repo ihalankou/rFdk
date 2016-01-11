@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Reports;
@@ -10,7 +11,7 @@ namespace RHost
 	{
 		public static DataTrade Trade
 		{
-			get { return FdkHelper.Wrapper.ConnectLogic.TradeWrapper.Trade; }
+			get { return FdkHelper.Trade; }
 		}
 
 		public static string GetTradeTransactionReport(DateTime from, DateTime to)

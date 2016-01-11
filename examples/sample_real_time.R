@@ -1,8 +1,13 @@
 ttConnect()
-idMonitor <- ttQuotesSubscribe('EURUSD', 2)
-# Wait for some time before running this line
-# it can be run multiple times and the snapshot reflects
-snapshot <- ttQuotesLevel2(idMonitor)
-View(snapshot)
 
-ttQuotesUnsubscribe(idMonitor)
+sym = ttFeed.Subscribe("EURUSD", 2)
+ttFeed.GetLevel2(sym)
+Sys.sleep(3)
+
+ttFeed.GetLevel2(sym)
+Sys.sleep(3)
+
+ttFeed.GetLevel2(sym)
+Sys.sleep(3)
+
+ttFeed.Unsubscribe(sym)

@@ -1,7 +1,10 @@
 #' Gets the account trades
 #' 
 #' @export
-ttTrades <- function(){
+ttTrade.Open <- function(){
+  merge(ttTrade_Open(), ttTrade_Position(), by="symbol", all=TRUE)
+}
+ttTrade_Open <- function(){
   symInfo = GetTradeHistory()
   
   agentComission = GetTradeAgentCommission(symInfo)
@@ -31,7 +34,7 @@ ttTrades <- function(){
   UnregisterVar(symInfo)
   
   data.table(agentComission, tradeClientOrderId, tradeComment, created,
-             expiration, symbol, initialVolume, isLimitOrder, isPendingOrder,
+  expiration, symbol, initialVolume, isLimitOrder, isPendingOrder,
              isPosition, isStopOrder, modified, orderId, price, profit, 
              side, stopLoss, swap, takeProfit, type, volume)
 }

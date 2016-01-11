@@ -4,28 +4,33 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using RDotNet;
-using RHost.Shared;
 using SoftFX.Extended;
+using FdkMinimal;
 
 namespace R2Cs
 {
     class Program
     {
+
+        static void ProgramStart()
+        {
+            DataFeed Feed = new DataFeed();
+            //Feed.Tick += (sender, args) => { };
+        }
+
         static void Main()
         {
-            var wrapper = new FdkWrapper
-            {
-                Address = "tpdemo.fxopen.com",
-                Login = "59932",
-                Password = "8mEx7zZ2"
-            };
+            /*
+            FdkHelper.Address = "tpdemo.fxopen.com";
+            FdkHelper.Login = "59932";
+            FdkHelper.Password = "8mEx7zZ2";
+            */
+            FdkHelper.Reconnect("");
 
             REngine.SetEnvironmentVariables();
             // There are several options to initialize the engine, but by default the following suffice:
             var engine = REngine.GetInstance();
-			wrapper.SetupBuilder ();
-            wrapper.Connect();
-            var bars = wrapper.ConnectLogic.Storage.Online.GetBars("EURUSD", PriceType.Ask, BarPeriod.M1, DateTime.Now, -1000000).ToArray();
+            var bars = FdkHelper.Storage.Online.GetBars("EURUSD", PriceType.Ask, BarPeriod.M1, DateTime.Now, -1000000).ToArray();
             WriteCsv(bars, "process.csv");
 
             // .NET Framework array to R vector.

@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Threading;
 
-namespace RHost.Shared
+namespace FdkMinimal
 {
     public class FdkTradeWrapper
     {
@@ -32,27 +32,43 @@ namespace RHost.Shared
         internal void SetupBuilder(string address, string username, string password, string logPath)
         {
             // Create builder
-            var builder = new FixConnectionStringBuilder
+            ConnectionStringBuilder builder = null;
+
+            if(!FdkHelper.UseLrp)
             {
-                TargetCompId = "EXECUTOR",
-                ProtocolVersion = FixProtocolVersion.TheLatestVersion.ToString(),
-                SecureConnection = true,
-                Port = 5004,
-                //ExcludeMessagesFromLogs = "W",
-                DecodeLogFixMessages = true,
-                Address = address,
-                Username = username,
-                Password = password,
-                FixLogDirectory = logPath,
-                FixEventsFileName = string.Format("{0}.trade.events.log", username),
-                FixMessagesFileName = string.Format("{0}.trade.messages.log", username)
-            };
+                var fixBuilder = new FixConnectionStringBuilder();
+                fixBuilder.TargetCompId = "EXECUTOR";
+                fixBuilder.ProtocolVersion = FixProtocolVersion.TheLatestVersion.ToString();
+                fixBuilder.SecureConnection = true;
+                fixBuilder.Port = 5004; ////ExcludeMessagesFromLogs = "W",
+                fixBuilder.DecodeLogFixMessages = true;
+                fixBuilder.Address = address;
+                fixBuilder.Username = username;
+                fixBuilder.Password = password;
+                fixBuilder.FixLogDirectory = logPath;
+                fixBuilder.FixEventsFileName = string.Format("{0}.trade.events.log", username);
+                fixBuilder.FixMessagesFileName = string.Format("{0}.trade.messages.log", username);
+                builder = fixBuilder;
+            }
+            else
+            {
+                var fixBuilder = new LrpConnectionStringBuilder();
+                fixBuilder.SecureConnection = true;
+                fixBuilder.Port = 5004; ////ExcludeMessagesFromLogs = "W",
+                fixBuilder.Address = address;
+                fixBuilder.Username = username;
+                fixBuilder.Password = password;
+                fixBuilder.MessagesLogFileName = string.Format("{0}.trade.events.log", username);
+                builder = fixBuilder;
+            }
+
+
             Builder = builder;
         }
 
         public DataTrade Trade { get; set; }
 
-        internal FixConnectionStringBuilder Builder { get; private set; }
+        internal ConnectionStringBuilder Builder { get; private set; }
         readonly AutoResetEvent _syncEvent = new AutoResetEvent(false);
 
         private void OnLogon(object sender, LogonEventArgs e)

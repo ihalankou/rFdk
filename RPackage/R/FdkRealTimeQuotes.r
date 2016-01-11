@@ -3,7 +3,7 @@
 #' @param symbol Symbol looked
 #' @param level Quote level
 #' @export
-ttQuotesSubscribe <- function(symbol, level){
+ttFeed.Subscribe <- function(symbol, level){
   quotesHistory <- RealTimeComputeQuoteHistory(symbol, level)
 }
 
@@ -11,7 +11,7 @@ ttQuotesSubscribe <- function(symbol, level){
 #' 
 #' @param idMonitoring Id of monitoring session
 #' @export
-ttQuotesLevel2 <- function(idMonitoring){
+ttFeed.GetLevel2 <- function(idMonitoring){
   snapshot <- SnapshotMonitoredSymbol(idMonitoring)
   
   bidPrice <- RealTimeQuotesBidPrice(snapshot)
@@ -31,7 +31,7 @@ ttQuotesLevel2 <- function(idMonitoring){
 #' 
 #' @param idMonitoring Id of monitoring session
 #' @export
-ttQuotesUnsubscribe <- function(idMonitoring){
+ttFeed.Unsubscribe <- function(idMonitoring){
   RealTimeRemoveEvent(idMonitoring)
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Extensions;
@@ -48,7 +49,7 @@ namespace RHost
         {
             get
             {
-                return FdkHelper.Wrapper.ConnectLogic.Feed;
+                return FdkHelper.Feed;
             }
         }
         static readonly ILog Log = LogManager.GetLogger(typeof(FdkSymbolInfo));
@@ -134,21 +135,23 @@ namespace RHost
         {
             FinancialCalculator financialCalculator = FdkStatic.Calculator;
             int decimals = symbol.Precision;
-            double contractSize = symbol.ContractMultiplier;
-            double? rateK = financialCalculator.CalculateAssetRate(1, symbol.SettlementCurrency, "USD");
-            if (!rateK.HasValue)
-                throw new InvalidOperationException(
-                    string.Format("No rate for currency pair: {0}/USD", symbol.SettlementCurrency));
-            double formula = Math.Pow(10, -decimals) * contractSize * rateK.Value;
-            return formula;
+            double? amountZ = financialCalculator.ConvertYToZ(Math.Pow(10, -decimals) * symbol.RoundLot, symbol.Name, "USD");
+            if (!amountZ.HasValue)
+            { 
+                Log.WarnFormat("No rate for currency pair: {0}/USD", symbol.Name);
+                return double.NaN;
+             //   throw new InvalidOperationException(
+               //     string.Format("No rate for currency pair: {0}/USD", symbol.Name));
+            }
+            return amountZ.Value;
         }
         public static double CalculatePriceBid(SymbolInfo symbol)
         {
             FinancialCalculator financialCalculator = FdkStatic.Calculator;
-            double? rateK = financialCalculator.CalculateAssetRate(1, symbol.SettlementCurrency, "USD");
-            if (!rateK.HasValue)
+            PriceEntry? priceEntry = financialCalculator.Prices.TryGetPriceEntry(symbol.Name);
+            if (!priceEntry.HasValue)
                 return double.NaN;
-            return rateK.Value;
+            return priceEntry.Value.Bid;
         }
     }
 }

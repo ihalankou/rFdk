@@ -8,4 +8,4 @@ installBinaryHttr <- function(fdkRLibPackage){
   file.remove(fdkRLibPackage)
 }
 installBinaryHttr("rClr_0.7-4.zip")
-installBinaryHttr("rFdk_1.0.20150817.zip")
+installBinaryHttr("rFdk_1.0.20151204.zip")

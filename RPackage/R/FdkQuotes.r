@@ -2,12 +2,11 @@
 #' Gets the quotes history
 #' 
 #' @param symbol Symbol looked
-#' @param startTime Starting time. Use ttGetEpochFromText if you want to take from text a valid date.
-#' @param endTime Ending time. Use ttGetEpochFromText if you want to take from text a valid date.
-#' @param depth Quotes depth
+#' @param startTime Starting time. 
+#' @param endTime Ending time. 
 #' @export
-ttQuotesHistory <- function(symbol,startTime= ttTimeZero() , endTime, depth=1){
-  quotesHistory <- ComputeQuoteHistory(symbol,startTime, endTime, depth)
+ttFeed.TickBestHistory <- function(symbol, startTime,  endTime){
+  quotesHistory <- ComputeQuoteHistory(symbol,startTime, endTime, 1)
   
   ask <- QuotesAsk(quotesHistory)
   bid <- QuotesBid(quotesHistory)

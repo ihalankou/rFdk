@@ -1,4 +1,5 @@
 ﻿using System;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 
@@ -8,7 +9,7 @@ namespace RHost
 	{
 		private static DataFeed Feed
 		{
-			get { return FdkHelper.Wrapper.ConnectLogic.Feed; }
+			get { return FdkHelper.Feed; }
 		}
 
 		public static string GetSessionInfo()

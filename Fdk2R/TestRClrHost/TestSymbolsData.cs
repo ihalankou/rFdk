@@ -1,3 +1,4 @@
+using FdkMinimal;
 using NUnit.Framework;
 using RHost;
 

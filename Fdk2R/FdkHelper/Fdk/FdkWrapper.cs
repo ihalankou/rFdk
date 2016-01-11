@@ -5,13 +5,15 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
+using SoftFX.Extended.Storage;
 
-namespace RHost.Shared
+namespace FdkMinimal
 {
     public class FdkWrapper
     {
         static readonly ILog Log = LogManager.GetLogger(typeof(FdkWrapper));
 
+        internal FdkConnectLogic ConnectLogic { get; private set; }
         public void SetupBuilder()
         {
             if (IsConnected)
@@ -29,7 +31,7 @@ namespace RHost.Shared
 
         public bool Connect()
         {
-            ConnectLogic.SetupPathsAndConnect(Path);
+            ConnectLogic.SetupPathsAndConnect(Address, Path);
             ConnectLogic.Feed.CacheInitialized += OnCacheInitialize;
             ConnectLogic.Feed.SessionInfo += OnSessionInfo;
             ConnectLogic.Feed.SymbolInfo += OnSymbolInfo;
@@ -123,7 +125,7 @@ namespace RHost.Shared
         }
 
 
-        public FdkConnectLogic ConnectLogic { get; private set; }
+        public DataFeedStorage Storage { get; set; }
 
         public bool IsConnected { get; set; }
 

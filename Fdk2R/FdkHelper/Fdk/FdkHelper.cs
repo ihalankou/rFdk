@@ -1,12 +1,12 @@
 ﻿using log4net;
-using RHost.Shared;
 using SoftFX.Extended;
+using SoftFX.Extended.Storage;
 using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
-namespace RHost
+namespace FdkMinimal
 {
     public static class FdkHelper
 	{
@@ -34,9 +34,9 @@ namespace RHost
             var loginStr = String.IsNullOrEmpty(login) ? DefaultLogin : login;
             var passwordString = String.IsNullOrEmpty(password) ? DefaultPassword : password;
 
-            Wrapper.Address = addr;
-            Wrapper.Login = loginStr;
-            Wrapper.Password = passwordString;
+            Address = addr;
+            Login = loginStr;
+            Password = passwordString;
             return Reconnect(path);
         }
 
@@ -69,7 +69,61 @@ namespace RHost
             }
         }
 
-        public static FdkWrapper Wrapper { get; set; }
+        static FdkWrapper Wrapper { get; set; }
+
+        public static DataFeed Feed
+        {
+            get
+            {
+                return Wrapper.ConnectLogic.Feed;
+            }
+        }
+        public static DataFeedStorage Storage
+        {
+            get
+            {
+                return Wrapper.ConnectLogic.Storage;
+            }
+        }
+        
+        public static DataTrade Trade {
+        	get{
+				return Wrapper.ConnectLogic.TradeWrapper.Trade;
+        	}
+        }
+
+        public static string Address { get
+            {
+                return Wrapper.Address;
+            }
+            set {
+                Wrapper.Address = value;
+            }
+        }
+        public static string Login
+        {
+            get
+            {
+                return Wrapper.Login;
+            }
+            set
+            {
+                Wrapper.Login = value;
+            }
+        }
+        public static string Password
+        {
+            get
+            {
+                return Wrapper.Password;
+            }
+            set
+            {
+                Wrapper.Password = value;
+            }
+        }
+
+        public static bool UseLrp { get; set; }
 
         public static void Disconnect()
         {
@@ -123,11 +177,28 @@ namespace RHost
 				return null;
         }
 
-        public static T GetFieldByName<T>(string fieldName)
+        static void ValidateAllAscii(string text)
         {
+            foreach(var c in text){
+                if(c>=128)
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "Field's text: '{0}' is invalid. It does not use English characters", text)
+                        );
+            }
+        }
+
+        public static T GetFieldByName<T>(string fieldName, bool toUpperCase = false)
+        {
+            ValidateAllAscii(fieldName);
             var barPeriodField = typeof(T).GetField(fieldName);
             if (barPeriodField == null)
-                return default(T);
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                            "Field's text: '{0}' is invalid. It was not a valid value", fieldName)
+                            );
+            }
 
             var result = (T)barPeriodField.GetValue(null);
 

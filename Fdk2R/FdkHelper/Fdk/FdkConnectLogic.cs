@@ -10,7 +10,7 @@ using System.Reflection;
 #endregion
 
 
-namespace RHost.Shared
+namespace FdkMinimal
 {
     public class FdkConnectLogic : IDisposable
     {
@@ -43,8 +43,8 @@ namespace RHost.Shared
         }
 
         internal FixConnectionStringBuilder Builder { get; private set; }
-        public DataFeed Feed { get; private set; }
-        public DataFeedStorage Storage { get; set; }
+        internal DataFeed Feed { get; private set; }
+        internal DataFeedStorage Storage { get; set; }
         public FdkTradeWrapper TradeWrapper { get; set; }
         public string RootPath { get; set; }
         public bool Initialized { get; set; }
@@ -62,8 +62,14 @@ namespace RHost.Shared
             Storage.Dispose();
             Storage = null;
         }
+        private static string MakeValidFileName(string name)
+        {
+            string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
-        public void SetupPathsAndConnect(string rootPath)
+            return System.Text.RegularExpressions.Regex.Replace(name, invalidRegStr, "_");
+        }
+        public void SetupPathsAndConnect(string serverAddress, string rootPath)
         {
             if (Initialized)
             {
@@ -71,6 +77,7 @@ namespace RHost.Shared
             }
             Initialized = true;
 
+            var santizedAddress = MakeValidFileName(serverAddress);
 
             // create and specify log directory
             string root;
@@ -93,7 +100,7 @@ namespace RHost.Shared
 
             Feed = new DataFeed(Builder.ToString()) { SynchOperationTimeout = 18000 };
 
-            var storagePath = Path.Combine(root, "Store");
+            var storagePath = Path.Combine(root, "Store", santizedAddress);
             Directory.CreateDirectory(storagePath);
 
             Storage = new DataFeedStorage(storagePath, StorageProvider.Ntfs, Feed, true);

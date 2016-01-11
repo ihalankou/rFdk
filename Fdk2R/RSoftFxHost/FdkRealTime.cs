@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FdkMinimal;
 using log4net;
 using SoftFX.Extended;
 using SoftFX.Extended.Events;
 
 namespace RHost
 {
-    public static class FdkRealTime
+    public class FdkRealTime
 	{
 		static readonly
             List<FdkRealTimeMonitor> Monitors
@@ -16,7 +17,8 @@ namespace RHost
 		static int _eventCount;
 		public static double MonitorSymbol(string symbol, double levelDbl)
 		{
-			try
+            Log.InfoFormat("FdkRealTime.MonitorSymbol(symbol: {0}, barPeriod: {1})", symbol, levelDbl);
+            try
 			{
                 var level = (int)levelDbl;
 				Monitors.Add(new FdkRealTimeMonitor(symbol, level, DateTime.UtcNow, _eventCount));
@@ -35,7 +37,8 @@ namespace RHost
         static readonly ILog Log = LogManager.GetLogger(typeof(FdkRealTime));
 
 		public static string SnapshotMonitoredSymbol(double id)
-		{
+	    {
+			//Log.InfoFormat("FdkRealTime.SnapshotMonitoredSymbol(id: {0})", id);
 			try
 			{
 				var quotes = BuildSnapshotFromMonitor(id);
@@ -47,7 +50,7 @@ namespace RHost
 				Log.Error(ex);
 				throw;
 			}
-		}
+	  }
 
         static void StartMonitoringOfSymbolIfNotEnabled(string symbol, int level)
         {
@@ -97,7 +100,7 @@ namespace RHost
         
         static DataFeed Feed
         {
-            get { return FdkHelper.Wrapper.ConnectLogic.Feed; }
+            get { return FdkHelper.Feed; }
         }
 
         public static bool IsMonitoringStarted { get; set; }

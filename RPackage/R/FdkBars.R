@@ -2,25 +2,18 @@
 #' Gets the bars as requested
 #' 
 #' @param symbol Symbol looked
-#' @param priceTypeStr Bid or Ask
+#' @param priceTypeStr Bid or Ask or BidAsk
 #' @param barPeriodStr Values like: S1, S10, M1, M5, M15, M30, H1, H4, D1, W1, MN1 (default 'M1')
 #' @param startTime Start of the time intervals  
 #' @param endTime End of time interval. If startTime is not set, the bar count is taken from barCount variable
 #' @param barCount Number of items of startTime is not set 
 #' @export
-ttBarsHistory <- function(symbol, 
+ttFeed.BarHistory <- function(symbol, 
      priceTypeStr="Bid", barPeriodStr = "M1", 
-     startTime= ttTimeZero() , endTime = ttNow(),
-     barCount = 10000
+     startTime= as.POSIXct(0, origin = "1970-01-02"), endTime = Sys.time(),
+     barCount = 0
      ){
   symbolBars <- ComputeBarsRange(symbol, priceTypeStr, barPeriodStr, startTime, endTime, barCount)
-  getBarsFrame(symbolBars)
-}
-
-#' Extracts bar array data as a full data frame
-#' 
-#' @param symbolBars Bars array variable
-getBarsFrame <- function(symbolBars){
   
   high <- BarHighs(symbolBars)
   low <- BarLows(symbolBars)
@@ -30,7 +23,39 @@ getBarsFrame <- function(symbolBars){
   from <- BarFroms(symbolBars)
   to <- BarTos(symbolBars)
   UnregisterVar(symbolBars)
-  data.table(high, low, open, close, volume, from, to)
+  
+  
+  resultData = data.table(high, low, open, close, volume, from, to)
+  
+  if(priceTypeStr == "BidAsk")
+  {
+    x1 <- data.table(resultData[c(T,F),])
+    setnames(x1, "high", "bidHigh")
+    setnames(x1, "low", "bidLow")
+    setnames(x1, "open", "bidOpen")
+    setnames(x1, "close", "bidClose")
+    setnames(x1, "from", "bidFrom")
+    setnames(x1, "to", "bidTo")
+    setnames(x1, "volume", "bidVolume")
+    
+    x2 <- data.table(resultData[c(F, T),])
+    setnames(x2, "high", "askHigh")
+    setnames(x2, "low", "askLow")
+    setnames(x2, "open", "askOpen")
+    setnames(x2, "close", "askClose")
+    setnames(x2, "from", "askFrom")
+    setnames(x2, "to", "askTo")
+    setnames(x2, "volume", "askVolume")
+    
+    result <- c(x1, x2)
+    
+    result <- as.data.table(result)
+    
+  }
+  else
+    result = resultData
+  
+  result
 }
 
 

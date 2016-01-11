@@ -1,4 +1,5 @@
-﻿using FdkMinimal.Facilities;
+﻿using FdkMinimal;
+using FdkMinimal.Facilities;
 using FdkRHost.Logging;
 using log4net.Appender;
 using log4net.Config;
@@ -75,8 +76,7 @@ namespace RHost
             var result = FdkHelper.ConnectToFdk(address, login, password, path);
             if(result == 0)
             {
-                var symbolInfoDic = FdkHelper.Wrapper.GetSymbolsDict();
-                var symbolInfoList = symbolInfoDic.Values.ToList();
+            	var symbolInfoList = FdkHelper.Feed.Server.GetSymbols().ToList();
                 SetRatesOfCurrentTime rates = new SetRatesOfCurrentTime(symbolInfoList, Calculator);
                 rates.Process();
             }

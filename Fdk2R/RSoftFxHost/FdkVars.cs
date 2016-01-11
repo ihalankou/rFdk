@@ -1,21 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace RHost
 {
     public static class FdkVars
     {
-        static FdkVars()
-        {
-
-            DiffFromUtc = DateTime.Now - DateTime.UtcNow;
-        }
-
         private static readonly Dictionary<string, object> Vars = new Dictionary<string, object>();
-
-        static TimeSpan DiffFromUtc;
-
 
         public static DateTime AddUtc(this DateTime utcTime)
         {
@@ -52,6 +44,11 @@ namespace RHost
         public static void ClearAll()
         {
             Vars.Clear();
+        }
+
+        public static void LaunchDebugger()
+        {
+            Debugger.Launch();
         }
 
         public static T GetValue<T>(string varName)
