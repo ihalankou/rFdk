@@ -6,10 +6,19 @@ If you see this error: "You are probably missing the Visual C++ Redistributable 
 https://www.microsoft.com/en-us/download/details.aspx?id=40784
 
 # How to install it?
-Look inside [install.r](https://github.com/SoftFx/FdkRLib/blob/master/install.r)  file (you can copy/paste the content into your R environment).
-
-For later sessions of R environment will require just to reload the library with this command:
-library(rFdk)
+```
+# Run it before you install packages. Should be run once
+installBinaryHttr <- function(fdkRLibPackage){
+  basicUrl = "https://github.com/SoftFx/FdkRLib/raw/master/dist/"
+  fullUrl = paste(basicUrl, fdkRLibPackage, sep = "")
+  download.file(fullUrl,destfile = fdkRLibPackage, method = "libcurl")
+  
+  install.packages(fdkRLibPackage, repos = NULL, type = "source", dependencies = TRUE)
+  file.remove(fdkRLibPackage)
+}
+installBinaryHttr("rClr_0.7-4.zip")
+installBinaryHttr("rFdk_1.0.20151204.zip")
+```
 
 # How to test it?
 You have sample code inside examples/sample_bars.r with various snippets of code. 
