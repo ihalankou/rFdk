@@ -26,24 +26,17 @@ You have sample code inside examples/sample_bars.r with various snippets of code
 A simple code sample code is the following:
 ```
 
-ttConnect("", "", "")
+ttConnect()
 
 #Get configuration information of your account
 head(ttConf.Symbol())
 head(ttConf.Currency())
 
 #Quotes in the last 5 minutes
-now <-as.POSIXct(Sys.time())
+now <-as.POSIXct(Sys.time(), tz="GMT")
 # 300 seconds from present
 prevNow <-as.POSIXct(now-(5*60))
-head(ttFeed.TickBestHistory("EURUSD", startTime = prevNow, endTime=now))
-
-# Get quotes level 2
-# 1000 seconds from present
-now <-as.POSIXct(Sys.time())
-prevNow <-as.POSIXct(now-1000)
-qt2= ttFeed.TickLevel2History('EURUSD', prevNow, now)
-head(qt2)
+ttFeed.TickBestHistory("EURUSD", startTime = prevNow, endTime=now)
 ```
 Follow this link with expanded example and output:
 
