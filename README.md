@@ -41,13 +41,13 @@ ttFeed.TickBestHistory("EURUSD", startTime = prevNow, endTime=now)
 Follow this link with expanded example and output:
 
 Configuration:
-http://rpubs.com/ciplogic/107672
+http://rpubs.com/ihalankou/configuration
 
 Feed History:
-http://rpubs.com/ciplogic/107673
+http://rpubs.com/ihalankou/feed_history
 
 Trades:
 http://rpubs.com/ciplogic/107674
 
 Real-time feed sample
-http://rpubs.com/ciplogic/130650
+http://rpubs.com/ihalankou/realtime_quotes
