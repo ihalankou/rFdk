@@ -1,4 +1,9 @@
-# Run it before you install packages. Should be run once
+if(require("data.table"))  
+ install.packages("data.table") 
+ library("data.table") 
+if(require("stringi")) 
+ install.packages("stringi") 
+ library("stringi") 
 installBinaryHttr <- function(fdkRLibPackage){
   basicUrl = "https://github.com/SoftFx/FdkRLib/raw/master/dist/"
   fullUrl = paste(basicUrl, fdkRLibPackage, sep = "")
