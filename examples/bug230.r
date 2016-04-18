@@ -6,6 +6,6 @@ st1 <- as.POSIXct(startTime, tz = "GMT")
 et1 <- as.POSIXct(endTime, tz = "GMT")
 as.double(et1)
 
-barPairsRange = ttQuotesHistory("#SPX", endTime = et1)
-#barPairsRange = ttQuotesHistory(symbol = "#SPX", startTime= st1, endTime = st1)
+barPairsRange = ttFeed.TickBestHistory("#SPX", endTime = et1)
+#barPairsRange = ttFeed.TickBestHistory(symbol = "#SPX", startTime= st1, endTime = st1)
 View(barPairsRange)
