@@ -1,8 +1,8 @@
 # Connect to server before running the sample
 # ttConnect()
-symbolData = ttGetSymbolData()
+symbolData =  ttConf.Symbol()
 View(symbolData)
 
 #gets the currency data
-currencyData = ttGetCurrencyData()
+currencyData = ttConf.Currency()
 View(currencyData)
