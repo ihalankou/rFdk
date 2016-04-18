@@ -1,7 +1,7 @@
 if(!require("data.table"))  
  install.packages("data.table") 
  library("data.table") 
-if!(require("stringi")) 
+if(!require("stringi")) 
  install.packages("stringi") 
  library("stringi") 
 installBinaryHttr <- function(fdkRLibPackage){
