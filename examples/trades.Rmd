@@ -30,7 +30,7 @@ Trades in account:
 ```{r}
 # Commented as it takes to long
 ttConnect("tp.st.soft-fx.eu", "100066", "123qwe!")
-head(ttTrade.Open())
+ttTrade.Open()
 ```
 All trades
 ```{r}
