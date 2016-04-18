@@ -28,12 +28,6 @@ ttConnect("", "", "")
 ```
 
 #2. Feed history  (bars and quotes)
-<p>Get 10000 bars of EURUSD symbol:</p>
-head(ttFeed.BarHistory("EURUSD"))
-
-```{r}
-ttFeed.BarHistory("EURUSD")
-```
 
 <p>Get 10000 bar quotes  of EURUSD symbol: </p>
 bars = ttFeed.BarHistory()("EURUSD")
