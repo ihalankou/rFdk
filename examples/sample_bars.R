@@ -8,11 +8,11 @@ boxplot(bars$highs)
 
 plot(highs, data = bars)
 
-endTime <- as.POSIXlt(Sys.time())
+endTime <- as.POSIXlt(Sys.time(), tz="GMT")
 startTime <- strptime("20/3/2 11:16:16.683", "%d/%m/%y %H:%M:%OS")
 
-st1 <- as.POSIXct(startTime)
-et1 <- as.POSIXct(endTime)
+st1 <- as.POSIXct(startTime, tz="GMT")
+et1 <- as.POSIXct(endTime, tz="GMT")
 
 quotes <- ttFeed.TickBestHistory("EURUSD", st1, et1)
 plot(quotes$ask, type="o")
