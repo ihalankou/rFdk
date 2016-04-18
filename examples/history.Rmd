@@ -33,7 +33,7 @@ ttConnect("", "", "")
 bars = ttFeed.BarHistory("EURUSD")
 
 ```{r}
-ttFeed.BarHistory()("EURUSD")
+ttFeed.BarHistory("EURUSD")
 ```
 
 
