@@ -1,7 +1,7 @@
-if(require("data.table"))  
+if(!require("data.table"))  
  install.packages("data.table") 
  library("data.table") 
-if(require("stringi")) 
+if!(require("stringi")) 
  install.packages("stringi") 
  library("stringi") 
 installBinaryHttr <- function(fdkRLibPackage){
@@ -13,4 +13,4 @@ installBinaryHttr <- function(fdkRLibPackage){
   file.remove(fdkRLibPackage)
 }
 installBinaryHttr("rClr_0.7-4.zip")
-installBinaryHttr("rFdk_1.0.20150817.zip")
+installBinaryHttr("rFdk_1.0.20160315.zip") 
