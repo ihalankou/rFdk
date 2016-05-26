@@ -27,14 +27,14 @@ ttConf.Currency()
 now <-as.POSIXct(Sys.time(), tz = "GMT")
 # 300 seconds from present
 prevNow <-as.POSIXct(now-(5*60), tz = "GMT")
-ttFeed.TickBestHistory("EURUSD", startTime = prevNow, endTime=now)
+head(ttFeed.TickBestHistory("EURUSD", startTime = prevNow, endTime=now))
 
 # Get quotes level 2
 # 1000 seconds from present
 now <-as.POSIXct(Sys.time(), tz = "GMT")
 prevNow <-as.POSIXct(now-1000, tz = "GMT")
 qt2= ttFeed.TickLevel2History('EURUSD', prevNow, now)
-View(qt2)
+head(qt2)
 ```
 Follow this link with expanded example and output:
 
